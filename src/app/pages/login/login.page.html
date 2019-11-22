@@ -1,0 +1,60 @@
+<ion-content class="ion-padding backgro">
+    <ion-slide>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="12">
+            <img class="pick-avatar" src="/assets/vyacsa-foods.png"/>
+          </ion-col>
+          <ion-col size="12">
+            <form (ngSubmit)="loginUser(f.value); f.resetForm()" #f="ngForm">
+              <ion-grid fixed>
+                <ion-row>
+                  <ion-col size="12" class="ion-no-margin">
+                    <h1>
+                      <strong>P</strong>ortal de <strong>P</strong>roveedores
+                    </h1>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item>
+                      <ion-label color="light" position="floating"
+                        >Email</ion-label
+                      >
+                      <ion-input type="email" name="email" [(ngModel)]="email" required></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label color="light" position="floating"
+                        >Password</ion-label
+                      >
+                      <ion-input
+                        type="password"
+                        name="password"
+                        ngModel
+                      ></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <button type="submit" [disabled]="f.invalid" class="btn btn-danger btn-lg btn-block button-ingresar">Ingresar</button>
+                    <!-- <ion-button
+                      #limpiarButton
+                      [disabled]="!f.valid"
+                      type="submit"
+                      class="button-ingresar"
+                      expand="block"
+                      color="success"
+                      shape="round"
+                    >
+                      Ingresar
+                    </ion-button> -->
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </form>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-content>

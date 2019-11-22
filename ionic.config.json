@@ -1,5 +1,7 @@
 {
   "name": "VyacsaFacturas",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
