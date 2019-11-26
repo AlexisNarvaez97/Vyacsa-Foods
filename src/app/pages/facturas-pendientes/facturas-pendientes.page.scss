@@ -1,0 +1,74 @@
+// ion-card {
+//     height: 200px;
+//     width: 200px;
+// }
+
+// .background-gradient {
+//   background: linear-gradient(to right, #74ebd5, #acb6e5);
+// }
+
+// .state-right {
+//   margin-left: 15px;
+// }
+
+// .archived {
+//   font-size: 20px;
+//   font-weight: 700;
+// }
+
+// .actions {
+//   font-size: 20px;
+//   font-weight: 700;
+// }
+
+// .fa-file-pdf {
+//   color: white;
+//   background: red;
+// }
+
+// .fa-file-code {
+//   color: black;
+//   background: white;
+// }
+
+// .icon-left {
+//   margin: 0;
+//   margin-right: 5px;
+// }
+
+// .icon-right {
+//   margin: 0;
+// }
+
+// .label-right {
+//   position: relative;
+//   right: -101px;
+// }
+
+// .badge-center {
+//   position: absolute;
+//   top: 2px;
+// }
+
+// @media (max-width: 320px) {
+//   ion-card {
+//     margin: 0;
+//     margin-bottom: 10px;
+
+//     .label-right {
+//       right: -64px;
+//     }
+
+//     .badge-center {
+//       right: 8px;
+//     }
+//   }
+// }
+
+.bg-image {
+  --background: red url("/assets/arrow.svg") no-repeat;
+}
+
+// .no-scroll .scroll-content {
+//   overflow: hidden;
+// }

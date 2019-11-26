@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FacturasService } from "../../services/facturas.service";
+import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-facturas-pendientes",
@@ -11,10 +13,11 @@ export class FacturasPendientesPage implements OnInit {
 
   facturas: any[] = [];
 
-  constructor(private facturasService: FacturasService) {}
+  constructor(private facturasService: FacturasService, private navCtrl: NavController, private router: Router) {}
 
   ngOnInit() {
     this.facturasService.getFacturas().subscribe((resp: any) => {
+      console.log(resp);
       this.facturas = resp;
     });
   }
@@ -27,5 +30,9 @@ export class FacturasPendientesPage implements OnInit {
 
   rechazar() {}
 
-  aceptar() {}
+  aceptar(factura) {
+    this.facturasService.selectedObject = factura;
+    const id = factura.idFactura;
+    this.router.navigate(['/factura-conceptos', id]);
+  }
 }

@@ -59,3 +59,10 @@ ion-label {
     padding: 1em;
   }
 }
+
+@media (min-width: 411px) {
+  form {
+    width: 355px;
+    // padding: 1em;
+  }
+}

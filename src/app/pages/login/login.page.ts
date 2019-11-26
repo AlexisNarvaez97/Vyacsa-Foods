@@ -87,4 +87,9 @@ export class LoginPage implements OnInit {
     //     })
     //   });
   }
+
+  login() {
+    this.navCtrl.navigateForward("/menu/facturas-pendientes");
+  }
+
 }

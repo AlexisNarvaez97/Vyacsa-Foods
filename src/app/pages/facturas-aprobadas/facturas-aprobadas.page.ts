@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FacturasService } from '../../services/facturas.service';
 
 @Component({
   selector: 'app-facturas-aprobadas',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FacturasAprobadasPage implements OnInit {
 
-  constructor() { }
+  facturas: any[] = [];
+
+  constructor(private facturasService: FacturasService) { }
 
   ngOnInit() {
+    this.facturasService.getFacturasAprobadas().subscribe( resp => {
+      console.log(resp);
+      this.facturas = resp;
+    });
+  }
+
+  aceptar(factura) {
+    console.log(factura);
+  }
+
+  rechazar(factura){
+  }
+
+  openLocalPdf() {
+    
   }
 
 }

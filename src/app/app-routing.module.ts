@@ -10,19 +10,15 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
+  },
+  {
+    path: 'factura-conceptos/:id',
+    loadChildren: () => import('./pages/factura-conceptos/factura-conceptos.module').then( m => m.FacturaConceptosPageModule)
+  },
+  {
+    path: 'factura-editar/:id',
+    loadChildren: () => import('./pages/factura-editar/factura-editar.module').then( m => m.FacturaEditarPageModule)
   }
-  // {
-  //   path: 'facturas-pendientes',
-  //   loadChildren: () => import('./pages/facturas-pendientes/facturas-pendientes.module').then( m => m.FacturasPendientesPageModule)
-  // },
-  // {
-  //   path: 'facturas-aprobadas',
-  //   loadChildren: () => import('./pages/facturas-aprobadas/facturas-aprobadas.module').then( m => m.FacturasAprobadasPageModule)
-  // },
-  // {
-  //   path: 'graficas',
-  //   loadChildren: () => import('./pages/graficas/graficas.module').then( m => m.GraficasPageModule)
-  // },
 ];
 
 @NgModule({

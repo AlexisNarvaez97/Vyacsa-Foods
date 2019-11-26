@@ -1,12 +1,13 @@
 <ion-split-pane contentId="main-content">
 
+  
   <ion-menu contentId="main-content">
     <ion-header>
       <ion-toolbar>
         <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
-
+    
     <ion-content>
       <ion-list>
         <ion-menu-toggle auto-hide="false" *ngFor="let p of pages"> 
@@ -17,15 +18,15 @@
         </ion-menu-toggle>   
       </ion-list>
     </ion-content>
-
-
+    
+    
     <ion-button (click)="salir()">
       Salir
     </ion-button>
-
-
+    
+    
   </ion-menu>
-
+  
   <ion-router-outlet id="main-content" main></ion-router-outlet>
-
+  
 </ion-split-pane>
