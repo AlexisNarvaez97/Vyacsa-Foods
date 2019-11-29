@@ -15,6 +15,11 @@ import { AppRoutingModule } from "./app-routing.module";
 // Storage
 import { IonicStorageModule } from "@ionic/storage";
 
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
+
+import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -29,6 +34,9 @@ import { IonicStorageModule } from "@ionic/storage";
   providers: [
     StatusBar,
     SplashScreen,
+    EmailComposer,
+    File,
+    FileOpener,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

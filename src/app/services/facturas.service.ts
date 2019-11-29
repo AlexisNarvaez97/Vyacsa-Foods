@@ -9,33 +9,36 @@ const URL = environment.url;
   providedIn: "root"
 })
 export class FacturasService {
-
   selectedObject: any;
 
   constructor(private http: HttpClient) {}
 
   getFacturas() {
-    return this.http.get(`${URL}/facturas`);
-    // .pipe(
-    //   map((resp: any) => {
-    //     return resp.map(a => {
-    //       const nombre = a.nombre;
-    //       const idFactura = a.idFactura;
-    //       const fechaCreacion = a.fecha_creacion;
-    //       const numeroOrden = a.num_orden;
-    //       const valido = a.valida;
-    //       const estado = a.estado;
-    //       return {
-    //         nombre,
-    //         idFactura,
-    //         fechaCreacion,
-    //         numeroOrden,
-    //         valido,
-    //         estado
-    //       };
-    //     });
-    //   })
-    // );
+    return this.http.get(`${URL}/facturas`)
+    .pipe(
+      map((resp: any) => {
+        return resp.map(a => {
+          const nombre = a.nombre;
+          const idFactura = a.idFactura;
+          const fechaCreacion = a.fecha_creacion;
+          const numeroOrden = a.num_orden;
+          const valido = a.valido;
+          const estado = a.estado;
+          const idOrden = a.idOrden;
+          const idProveedor = a.idProveedor;
+          return {
+            nombre,
+            idFactura,
+            fechaCreacion,
+            numeroOrden,
+            idOrden,
+            idProveedor,
+            valido,
+            estado
+          };
+        });
+      })
+    );
   }
 
   getFacturasAprobadas() {
@@ -70,10 +73,38 @@ export class FacturasService {
         const comprobante: [] = resp.data["cfdi:Comprobante"];
         const conceptos: [] =
           resp.data["cfdi:Comprobante"]["cfdi:Conceptos"]["cfdi:Concepto"];
-        const impuestos: [] = resp.data["cfdi:Comprobante"]["cfdi:Conceptos"]["cfdi:Concepto"]["cfdi:Impuestos"] || ["cfdi:Traslados"]["cfdi:Traslado"];
+        const impuestos: [] =
+          resp.data["cfdi:Comprobante"]["cfdi:Conceptos"]["cfdi:Concepto"][
+            "cfdi:Impuestos"
+          ] || ["cfdi:Traslados"]["cfdi:Traslado"];
         const emisor: [] = resp.data["cfdi:Comprobante"]["cfdi:Emisor"];
         return { comprobante, conceptos, emisor, impuestos };
       })
     );
+  }
+
+  postCredit(facturas, facturaOrden) {
+
+    console.log('FacturaDiferencia', facturas);
+    console.log('FacturaNormal', facturaOrden);
+
+
+    const formData = new FormData();
+
+    formData.append('idfactura', facturaOrden.idFactura);
+    formData.append('idorden', facturaOrden.idOrden);
+    formData.append('idproveedor', facturaOrden.idProveedor);
+    formData.append('total_recibida', facturas.CantidadTotal);
+    formData.append('refac_not', facturaOrden.estado);
+
+    for (const [index, val] of facturas.entries()) {
+      // console.log(`Hola ${val.cantidadSolicitada} + Index ${index}`);
+      // console.log(`'item_df[${index}]', '${val.nombre}'|${val.diferencia}|${val.monto}~,`);
+      formData.append(`items_df[${index}]`, `${val.nombre}|${val.diferencia}|${val.monto}~,`);
+      // tslint:disable-next-line: max-line-length
+      formData.append(`items_rec[${index}]`, `${val.nombre}|${val.cantidadSolicitada}|${val.precioUnitario}|${val.cantidadTotal}|0.00|0.00,`);
+      // tslint:disable-next-line: max-line-length
+    }
+    return this.http.post(`${URL}/credit`, formData);
   }
 }

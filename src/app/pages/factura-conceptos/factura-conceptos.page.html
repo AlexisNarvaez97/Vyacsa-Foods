@@ -1,11 +1,14 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header no-border>
+  <ion-toolbar color="electron">
     <ion-buttons slot="start">
       <ion-back-button
+        color="dark"
         defaultHref="/menu/facturas-pendientes"
       ></ion-back-button>
     </ion-buttons>
-    <ion-title>Verificacion de facturas</ion-title>
+    <ion-title class="text-capitalize ion-no-padding-left ion-text-center">
+      <strong>V</strong>erificacion de <strong>F</strong>acturas</ion-title
+    >
   </ion-toolbar>
 </ion-header>
 
@@ -13,7 +16,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th class="ion-text-center">Descripcion</th>
+        <th class="ion-text-center">Descripción</th>
         <th class="ion-text-center">Monto</th>
         <th class="ion-text-center">Cantidad Recibida</th>
         <th class="ion-text-center">Acciones</th>
@@ -24,10 +27,13 @@
         <th class="ion-text-center">
           <ion-label>{{ factura.Descripcion | slice:0:20}} </ion-label>
         </th>
-        <th class="ion-text-center">
-          {{ factura.Cantidad | slice:0:10 }}
+        <th class="ion-text-center padding-top">
+          <ion-label class="cantidad">
+            {{ factura.Cantidad | slice:0:10 }}
+          </ion-label>
+          <ion-icon color="progress" slot="start" name="cash"></ion-icon>
         </th>
-        <th class="ion-text-center">
+        <th class="ion-text-center padding-th">
           <ion-input
             name="cantidad"
             type="number"
@@ -37,9 +43,14 @@
             placeholder="0.00"
             (ngModelChange)="modelChanged($event)"
           ></ion-input>
+          <ion-icon color="gold" class="icon-belinda" name="swap"></ion-icon>
         </th>
         <th class="ion-text-center">
-          <ion-button (click)="validarFactura(i)" color="success" class="ion-no-margin">
+          <ion-button
+            (click)="validarFactura(i)"
+            color="progress"
+            class="ion-no-margin"
+          >
             <ion-icon slot="icon-only" name="checkmark"></ion-icon>
           </ion-button>
         </th>
@@ -47,43 +58,65 @@
     </tbody>
   </table>
 
+  <div class="divisor ion-no-margin ion-no-padding"></div>
 
-  <ion-row *ngIf="facturaRechazada">
-    <!-- <ion-col size="12">
-      <ion-list>
-        <ion-radio-group
-          (ionSelect)="changeRadio($event)"
-        >
-          <ion-label class="ion-text-center">
+  <div *ngIf="facturaRechazada">
+
+  <ion-row class="ion-padding ion-no-padding-top">
+    <ion-list lines="none" class="ion-no-padding">
+      <ion-radio-group (ionSelect)="changeRadio($event)">
+        <div class="col-12" style="margin: 15px 0px;">
+          <ion-label class="ion-text-center notificaciones">
             Seleccione una de las siguientes opciones para notificar al
             proveedor:
           </ion-label>
+        </div>
 
-          <ion-item>
+        <div class="col">
+          <ion-item class="ion-no-margin ion-text-center">
             <ion-label>Refacturación</ion-label>
-            <ion-radio value="factura"></ion-radio>
+            <ion-radio color="primary" value="factura"></ion-radio>
+            <ion-icon color="primary" slot="start" name="calendar"></ion-icon>
           </ion-item>
-
-          <ion-item>
+        </div>
+        <div class="col">
+          <ion-item class="ion-no-margin ion-text-center">
             <ion-label>Nota de crédito</ion-label>
-            <ion-radio value="nota"></ion-radio>
+            <ion-radio color="danger" value="nota"></ion-radio>
+            <ion-icon color="dark" slot="start" name="document"></ion-icon>
           </ion-item>
-        </ion-radio-group>
-      </ion-list>
-    </ion-col> -->
+        </div>
+      </ion-radio-group>
+    </ion-list>
+  </ion-row>
 
-    <ion-col size="12">
-      <h2 class="ion-text-center">Articulos con diferencia</h2>
+  <div class="divisor ion-no-margin ion-no-padding"></div>
 
-      <div class="concept-dif">
-        <h3 class="ion-text-start">Nombre</h3>
-        <h3 class="ion-text-center">Diferencia</h3>
-        <h3 class="concept-monto">Monto</h3>
-      </div>
+  <ion-row>
+
+    <ion-col class="ion-text-center" size="12">
+      <ion-label>Artículos con diferencia</ion-label>
+    </ion-col>
+    
+    <ion-col class="ion-text-center" size="4">
+      <ion-label>Nombre</ion-label>
+    </ion-col>
+    <ion-col class="ion-text-center" size="4">
+      <ion-label>Diferencia</ion-label>
+    </ion-col>
+    <ion-col class="ion-text-center" size="4">
+      <ion-label>Monto</ion-label>
+    </ion-col>
+
+
+    <ion-col size="12" class="ion-text-center">
+
+      <!-- <div class="concept-dif">
+      </div> -->
 
       <ion-list>
-        <ion-item *ngFor="let factura of facturasDiferencias">
-          <ion-label class="ion-text-wrap ion-text-start"
+        <ion-item *ngFor="let factura of facturasDiferencias" lines="none">
+          <ion-label class="ion-text-capitalize ion-text-wrap left"
             >{{ factura.nombre | slice:0:5 }}</ion-label
           >
           <ion-label class="ion-text-center">
@@ -91,7 +124,7 @@
               {{ factura.diferencias | currency }}
             </ion-badge>
           </ion-label>
-          <ion-label class="ion-text-center">
+          <ion-label class="ion-text-center right">
             <ion-badge color="danger">
               {{ factura.montoTotal | currency }}
             </ion-badge>
@@ -99,20 +132,26 @@
         </ion-item>
       </ion-list>
     </ion-col>
+  </ion-row>
 
+  <div class="divisor ion-no-margin ion-no-padding"></div>
+
+  <ion-row>
     <ion-col size="6">
-      <ion-button expand="block" fill="outline" (click)="aceptarFactura()"
-        >Aceptar</ion-button
+      <ion-button color="primary" expand="block" fill="outline" (click)="aceptarFactura()"
+      >Aceptar</ion-button
       >
     </ion-col>
-
+    
     <ion-col size="6">
       <ion-button
-        expand="block"
-        fill="outline"
-        routerLink="/menu/facturas-pendientes"
-        >Cancelar</ion-button
+      color="primary"
+      expand="block"
+      fill="outline"
+      routerLink="/menu/facturas-pendientes"
+      >Cancelar</ion-button
       >
     </ion-col>
   </ion-row>
+</div>
 </ion-content>

@@ -1,8 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { FacturasService } from "../../services/facturas.service";
 
 import Swal from "sweetalert2";
+import { EmailComposer } from "@ionic-native/email-composer/ngx";
+import Factura from "../../interfaces/factura.model";
+import { NavController } from "@ionic/angular";
 
 @Component({
   selector: "app-factura-conceptos",
@@ -20,15 +23,23 @@ export class FacturaConceptosPage implements OnInit {
 
   facturaRechazada = false;
 
+  facturaRefacturacion: any;
+  facturaNota: any;
+
   cantidadProporcionada = 0;
 
   facturasDiferencias: any[] = [];
 
   facturaMap: { [id: string]: any } = {};
 
+  factura: Factura;
+
   constructor(
     private route: ActivatedRoute,
-    private facturaService: FacturasService
+    private facturaService: FacturasService,
+    private emailComposer: EmailComposer,
+    private navCtrl: NavController,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -36,6 +47,7 @@ export class FacturaConceptosPage implements OnInit {
     this.getFactura(id);
 
     const facturaActual = this.facturaService.selectedObject;
+    this.factura = this.facturaService.selectedObject;
     // console.log(`Factura actual con el ${id}`);
     console.log(facturaActual);
   }
@@ -73,11 +85,8 @@ export class FacturaConceptosPage implements OnInit {
     let index;
     let diferencias;
     let montoTotal;
-    // console.log(idFactura);
     const partidas = this.conceptos;
     for (const [id, factura] of partidas.entries()) {
-      // console.log(index, factura, "Partidas");
-
       if (id === idFactura) {
         index = id;
         nombre = factura.Descripcion;
@@ -94,15 +103,15 @@ export class FacturaConceptosPage implements OnInit {
         montoTotal = Number((diferencias * precioUnitario).toFixed(2));
 
         if (cantidadRecibida < cantidadSolicitada) {
-          // console.log("Diferencia");
           Swal.fire({
             position: "center",
             icon: "info",
+            allowOutsideClick: false,
             title: `Existe una diferencia de mercancia de ${diferencias.toFixed(
               2
             )}`,
             showConfirmButton: false,
-            timer: 2700
+            timer: 500
           });
         }
         this.facturaRechazada = true;
@@ -117,23 +126,107 @@ export class FacturaConceptosPage implements OnInit {
       diferencias,
       montoTotal
     };
-    // console.log(facturaDif);
-
     this.facturasDiferencias.push(facturaDif);
 
     if (this.facturasDiferencias.length > partidas.length) {
-      const idRepetido = this.facturasDiferencias.findIndex(item => item.index === facturaDif.index);
+      const idRepetido = this.facturasDiferencias.findIndex(
+        item => item.index === facturaDif.index
+      );
       this.facturasDiferencias[idRepetido] = facturaDif;
       console.log(`Rebaso el tamaño de los conceptos ${partidas.length}`);
       this.facturasDiferencias.pop();
       return;
     }
-    // console.log(this.facturasDiferencias);
+  }
+
+  changeRadio(valor) {
+    const valorRadio = valor.detail.value;
+    const facturaEdit = this.factura;
+
+    if (valorRadio === "factura") {
+      const facturaRefacturacion = {
+        ...facturaEdit
+      };
+
+      facturaRefacturacion.estado = "1.2";
+
+      this.facturaRefacturacion = facturaRefacturacion;
+
+      // console.log("Refacturacion", facturaRefacturacion);
+
+      this.emailComposer.open({
+        app: "gmail",
+        to: "alexisnarvaez97@hotmail.com",
+        cc: "alexisnarvaez97@hotmail.com",
+        subject: `${facturaEdit.nombre} con N.O.C ${facturaEdit.num_orden}`,
+        body: "Refacturación",
+        isHtml: true
+      });
+    } else if (valorRadio === "nota") {
+      const facturaNota = {
+        ...facturaEdit
+      };
+
+      facturaNota.estado = "1.1";
+
+      this.facturaNota = facturaNota;
+
+      // console.log("Nota", facturaNota);
+
+      this.emailComposer.open({
+        app: "gmail",
+        to: "alexisnarvaez97@hotmail.com",
+        cc: "alexisnarvaez97@hotmail.com",
+        subject: `${facturaEdit.nombre} con N.O.C ${facturaEdit.num_orden}`,
+        body: "Nota de crédito",
+        isHtml: true
+      });
+    }
+  }
+
+  aceptarFactura() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "center",
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true,
+      onOpen: toast => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      }
+    });
+
+    const facturaDif = this.facturasDiferencias;
+
+    const facturaNota = this.facturaNota;
+    const facturaRefacturacion = this.facturaRefacturacion;
+
+    if (facturaNota) {
+      return this.facturaService
+        .postCredit(facturaDif, facturaNota)
+        .subscribe(resp => {
+          console.log("Respuesta NOTA", resp);
+          this.navCtrl.navigateRoot(["menu/facturas-pendientes"]);
+          Toast.fire({
+            icon: "success",
+            title: "Factura guardada con exito"
+          });
+        });
+    } else {
+      // tslint:disable-next-line: deprecation
+      return this.facturaService
+        .postCredit(facturaDif, facturaRefacturacion)
+        .subscribe(resp => {
+          console.log("Respuesta REFACTURACION", resp);
+          this.navCtrl.navigateRoot(["menu/facturas-pendientes"]);
+          Toast.fire({
+            icon: "success",
+            title: "Factura guardada con exito"
+          });
+        });
+    }
 
     // console.log(facturaDif);
   }
-
-  aceptarFactura() {}
-
-  changeRadio(valor) {}
 }

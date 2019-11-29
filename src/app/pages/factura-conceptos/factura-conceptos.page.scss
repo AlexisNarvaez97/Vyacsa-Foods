@@ -1,3 +1,72 @@
 ion-content {
-    // --background: url('/assets/f5.svg') no-repeat center fixed;
+  // --background: url('/assets/f5.svg') no-repeat center fixed;
+}
+
+.table {
+  font-size: 12px;
+  margin-bottom: 0px;
+}
+
+ion-label {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.padding-top {
+  padding-top: 19px;
+}
+
+.padding-th {
+  padding-top: 8px;
+  padding-bottom: 0px;
+}
+
+.cantidad {
+  font-weight: 700 !important;
+}
+
+.icon-belinda {
+  position: relative;
+  top: -27px;
+  left: -25px;
+}
+
+.left {
+  position: relative;
+  left: 24px;
+}
+
+.right {
+    position: relative;
+    right: -16px;
+}
+
+table .table-bordered {
+  border-color: white;
+}
+
+.ion-no-padding-left {
+  padding-left: 0px;
+}
+
+.ion-no-padding-right {
+  padding-right: 0px;
+}
+
+.ion-no-padding-top {
+  padding-top: 0px;
+}
+
+.ion-no-padding-bottom {
+  padding-bottom: 0px;
+}
+
+.divisor {
+  width: 100%;
+  height: 2px;
+  background-color: gray;
+}
+
+.notificaciones {
+  font-size: 15px;
 }
