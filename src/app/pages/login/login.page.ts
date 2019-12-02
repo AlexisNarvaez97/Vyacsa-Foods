@@ -4,6 +4,8 @@ import { Storage } from "@ionic/storage";
 import { LoginService } from "../../services/login.service";
 import { NavController } from "@ionic/angular";
 
+import Swal from "sweetalert2";
+
 @Component({
   selector: "app-login",
   templateUrl: "./login.page.html",
@@ -34,32 +36,70 @@ export class LoginPage implements OnInit {
   }
 
   loginUser(form) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "center",
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true,
+      onOpen: toast => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      }
+    });
+
     const email = form.email;
     const password = form.password;
 
-    this.loginService.loginUser(email, password).subscribe((user: any) => {
-      this.loginService.getUsuarios().subscribe((resp: any) => {
-        this.userData = resp;
-
-        const existe = this.userData.find( data => data.email === email);
-
-        if ( existe ) {
-          console.log('Wey si puedes logearte');
-          this.navCtrl.navigateForward("/menu/facturas-pendientes");
+    this.loginService.loginUser(email, password).subscribe(
+      (user: any) => {
+        console.log("Login exitoso");
+        Toast.fire({
+          icon: "success",
+          title: "Login exitoso"
+        });
+        this.navCtrl.navigateForward("/menu/facturas-pendientes");
+        // console.log(resp.data);
+        // this.storage.set("User", resp.data);
+        // this.storage.set("isLogged", true);
+      },
+      err => {
+        if (err.error.message === "Invalid Password") {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Contraseña invalida",
+            showConfirmButton: false,
+            showClass: {
+              popup: "animated fadeInDown faster"
+            },
+            hideClass: {
+              popup: "animated fadeOutUp faster"
+            },
+            timer: 1000
+          });
+          console.log("Password");
+        } else {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Email invalido",
+            showConfirmButton: false,
+            showClass: {
+              popup: "animated fadeInDown faster"
+            },
+            hideClass: {
+              popup: "animated fadeOutUp faster"
+            },
+            timer: 1000
+          });
         }
-
-        // console.log('OMG', existe);
-      });
-      // console.log(resp.data);
-      // this.storage.set("User", resp.data);
-      // this.storage.set("isLogged", true);
-    }, err => {
-      if (err.status === 400 || 404) {
-        console.log('Te llevo la verga perro');
+        // console.log(err.error.message);
+        // console.log('El famoso error', err);
+        // console.log('Login fallido');
+        // console.log('Error', err);
       }
-      // console.log('Error', err);
-    });
-
+    );
 
     // this.authService
     //   .loginUser(value)
@@ -91,5 +131,4 @@ export class LoginPage implements OnInit {
   login() {
     this.navCtrl.navigateForward("/menu/facturas-pendientes");
   }
-
 }
