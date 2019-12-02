@@ -1,5 +1,5 @@
 <ion-header no-border>
-  <ion-toolbar color="electron">
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button
         color="dark"
@@ -13,6 +13,7 @@
 </ion-header>
 
 <ion-content>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -39,16 +40,19 @@
             type="number"
             ngModel
             class="no-padding"
-            step="0.00"
-            placeholder="0.00"
+            min="1"
+            pattern="^[0-9]+"
+            placeholder="1..."
             (ngModelChange)="modelChanged($event)"
+            required
           ></ion-input>
           <ion-icon color="gold" class="icon-belinda" name="swap"></ion-icon>
         </th>
         <th class="ion-text-center">
           <ion-button
+            type="submit"
             (click)="validarFactura(i)"
-            color="progress"
+            color="success"
             class="ion-no-margin"
           >
             <ion-icon slot="icon-only" name="checkmark"></ion-icon>
@@ -57,6 +61,7 @@
       </tr>
     </tbody>
   </table>
+</form>
 
   <div class="divisor ion-no-margin ion-no-padding"></div>
 

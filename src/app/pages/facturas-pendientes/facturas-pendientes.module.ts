@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { FacturasPendientesPageRoutingModule } from './facturas-pendientes-routing.module';
 
 import { FacturasPendientesPage } from './facturas-pendientes.page';
+import { ExpandableComponent } from '../../components/expandable/expandable.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { FacturasPendientesPage } from './facturas-pendientes.page';
     PipesModule,
     FacturasPendientesPageRoutingModule
   ],
-  declarations: [FacturasPendientesPage]
+  declarations: [FacturasPendientesPage, ExpandableComponent]
 })
 export class FacturasPendientesPageModule {}

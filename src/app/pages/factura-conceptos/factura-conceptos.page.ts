@@ -23,6 +23,8 @@ export class FacturaConceptosPage implements OnInit {
 
   facturaRechazada = false;
 
+  cantidadSolicitada;
+
   facturaRefacturacion: any;
   facturaNota: any;
 
@@ -72,11 +74,30 @@ export class FacturaConceptosPage implements OnInit {
       return;
     }
 
+    console.log(cantidadInput);
+
     this.cantidadProporcionada = cantidadInput;
     // console.log("Evento", cantidadInput);
   }
 
+  onSubmit(valor) {
+    // console.log(valor.valid);
+    // console.log(valor.value.cantidad);
+  }
+
   validarFactura(idFactura) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "center",
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true,
+      onOpen: toast => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      }
+    });
+
     let nombre;
     let cantidadSolicitada;
     let cantidadTotal;
@@ -90,10 +111,20 @@ export class FacturaConceptosPage implements OnInit {
       if (id === idFactura) {
         index = id;
         nombre = factura.Descripcion;
+        this.cantidadSolicitada = cantidadSolicitada;
         cantidadSolicitada = factura.Cantidad;
         cantidadTotal = factura.Importe;
         precioUnitario = factura.ValorUnitario;
         cantidadRecibida = this.cantidadProporcionada;
+
+        if (cantidadRecibida < 0) {
+          Toast.fire({
+            icon: "error",
+            title: "No se aceptan numeros negativos"
+          });
+          // console.log("Negativo");
+          return;
+        }
 
         // Operaciones
 
@@ -102,7 +133,7 @@ export class FacturaConceptosPage implements OnInit {
         );
         montoTotal = Number((diferencias * precioUnitario).toFixed(2));
 
-        if (cantidadRecibida < cantidadSolicitada) {
+        if (cantidadSolicitada > cantidadRecibida) {
           Swal.fire({
             position: "center",
             icon: "info",
@@ -113,8 +144,11 @@ export class FacturaConceptosPage implements OnInit {
             showConfirmButton: false,
             timer: 500
           });
+          this.facturaRechazada = true;
+        } else {
+          console.log("No hagas nada no hay diferencias", diferencias);
+          return;
         }
-        this.facturaRechazada = true;
       }
     }
     const facturaDif = {

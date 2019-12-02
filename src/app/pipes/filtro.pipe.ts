@@ -10,7 +10,9 @@ export class FiltroPipe implements PipeTransform {
     }
 
     return arreglo.filter(item => {
-      return item.nombre.toLowerCase().includes(texto.toLowerCase());
+      item.open = true;
+      item.open = false;
+      return item.idOrden.toLowerCase().includes(texto.toLowerCase());
     });
   }
 }

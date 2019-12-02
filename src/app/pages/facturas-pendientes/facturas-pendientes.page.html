@@ -1,14 +1,163 @@
-<ion-header no-border>
-  <ion-toolbar>
+<ion-header>
+  <!-- <ion-toolbar color="secondary">
+    <ion-title>Academy Accordion</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="automaticClose = !automaticClose">
+        <ion-icon
+          slot="icon-only"
+          name="close"
+          *ngIf="automaticClose"
+        ></ion-icon>
+        <ion-icon
+          slot="icon-only"
+          name="resize"
+          *ngIf="!automaticClose"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar> -->
+  <ion-toolbar color="secondary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">Facturas Pendientes</ion-title>
+    <ion-title class="ion-text-center margin-right">Facturas Pendientes</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-searchbar
+          animated
+          placeholder="Buscar factura..."
+          cancelButtonText="Custom Cancel"
+          (ionChange)="buscar( $event )"
+        ></ion-searchbar>
+      </ion-col>
+    </ion-row>
+
+    <ion-list
+      *ngFor="let item of facturas | filtro: searchFactura; let i = index"
+      class="accordion-list ion-no-padding"
+      lines="none"
+      detail="false"
+    >
+      <ion-item
+        tappable
+        (click)="toggleSection(i)"
+        [ngClass]="{'section-active': item.open, 'section': !item.open}"
+      >
+        <ion-icon
+          slot="start"
+          name="arrow-forward"
+          *ngIf="!item.open"
+        ></ion-icon>
+        <ion-icon slot="start" name="arrow-down" *ngIf="item.open"></ion-icon>
+        <ion-label>
+          {{ item.nombre }}
+        </ion-label>
+      </ion-item>
+
+      <div *ngIf="item.open">
+        <!-- <h1>{{ item. numeroOrden }}</h1>
+        <h2>{{ item. numeroOrden }}</h2>
+        <h3>{{ item.idOrden }}</h3>
+        <ion-button
+          expand="full"
+          (click)="aceptar(item)"
+          color="success"
+          class="ion-no-margin"
+        >
+          <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+        </ion-button> -->
+        <ion-card>
+          <ion-row>
+            <ion-col size="6" class="ion-text-center">
+              <p>Fecha creación</p>
+              <ion-item class="ion-text-center">
+                <ion-label>{{item.fechaCreacion}}</ion-label>
+                <ion-icon
+                  color="medium"
+                  class="icon-simple"
+                  slot="start"
+                  name="calendar"
+                ></ion-icon>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6" class="ion-text-center">
+              <p>Fecha subida</p>
+              <ion-item class="ion-text-center">
+                <ion-label>{{item.fechaSubida}}</ion-label>
+                <ion-icon
+                  color="success"
+                  class="icon-simple"
+                  slot="start"
+                  name="checkmark-circle-outline"
+                ></ion-icon>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="6" class="ion-text-center">
+              <p>ID la factura</p>
+              <ion-item class="ion-text-center">
+                <ion-label>{{item.idFactura}}</ion-label>
+                <ion-icon
+                  color="dark tint"
+                  class="icon-facts"
+                  slot="start"
+                  name="clipboard"
+                ></ion-icon>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6" class="ion-text-center">
+              <p>ID de la orden</p>
+              <ion-item class="ion-text-center">
+                <ion-label>{{item.idOrden}}</ion-label>
+                <ion-icon
+                  color="danger shade"
+                  class="icon-facts"
+                  slot="start"
+                  name="document"
+                ></ion-icon>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <ion-button
+                expand="full"
+                (click)="aceptar(item)"
+                color="success"
+                class="ion-no-margin"
+              >
+                <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button
+                expand="full"
+                (click)="rechazar()"
+                color="danger"
+                class="ion-no-margin"
+              >
+                <ion-icon slot="icon-only" name="close"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
+
+      <!-- <p *ngIf="item.children.length === 0 && item.open">
+      Sorry, nothing
+    </p> -->
+    </ion-list>
+
+    <!-- <app-expandable></app-expandable> -->
+
+    <!-- <ion-grid fixed>
     <ion-row>
       <ion-col size="12">
         <ion-searchbar
@@ -24,7 +173,7 @@
           <ion-row>
             <ion-col size="12" class="ion-no-padding">
               <ion-item color="tertiary" lines="none">
-                <!-- Empieza fecha y icono -->
+  
                 <ion-label>
                   {{ factura.fechaCreacion }}
                 </ion-label>
@@ -33,9 +182,7 @@
                   name="calendar"
                   slot="start"
                 ></ion-icon>
-                <!-- Cierre de fecha y icono-->
 
-                <!-- Empieza numero de orden y icono -->
                 <ion-label class="label-right">
                   {{ factura.numeroOrden }}
                 </ion-label>
@@ -125,9 +272,6 @@
       <img src="/assets/no-data.png" alt="" />
       <h4>No hay facturas por el momento</h4>
     </ion-col>
+  </ion-grid> -->
   </ion-grid>
-
-
-
-
 </ion-content>

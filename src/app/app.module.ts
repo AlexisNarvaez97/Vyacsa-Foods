@@ -19,6 +19,7 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    Ionic4DatepickerModule,
     HttpClientModule,
     PipesModule,
     IonicStorageModule.forRoot()

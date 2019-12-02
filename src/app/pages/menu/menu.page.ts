@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-menu',
@@ -28,7 +29,7 @@ export class MenuPage implements OnInit {
 
   selectedPath = "";
 
-  constructor(private router: Router) { 
+  constructor(private router: Router, private navCtrl: NavController) { 
 
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedPath = event.url;
@@ -42,7 +43,7 @@ export class MenuPage implements OnInit {
   async salir() {
     // await this.storage.set('isLogged', false);
     // this.storage.remove('User');
-    // this.navCtrl.navigateRoot('/login');
+    this.navCtrl.navigateRoot('/login');
   }
 
 }

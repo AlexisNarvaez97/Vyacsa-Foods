@@ -25,6 +25,7 @@ export class FacturasService {
           const valido = a.valido;
           const estado = a.estado;
           const idOrden = a.idOrden;
+          const fechaSubida = a.fecha_subida;
           const idProveedor = a.idProveedor;
           return {
             nombre,
@@ -33,6 +34,7 @@ export class FacturasService {
             numeroOrden,
             idOrden,
             idProveedor,
+            fechaSubida,
             valido,
             estado
           };
@@ -95,7 +97,7 @@ export class FacturasService {
     formData.append('idorden', facturaOrden.idOrden);
     formData.append('idproveedor', facturaOrden.idProveedor);
     formData.append('total_recibida', facturas.CantidadTotal);
-    formData.append('refac_not', facturaOrden.estado);
+    formData.append('refac_not', facturaOrden.estado); // No funciona con otro estado.
 
     for (const [index, val] of facturas.entries()) {
       // console.log(`Hola ${val.cantidadSolicitada} + Index ${index}`);

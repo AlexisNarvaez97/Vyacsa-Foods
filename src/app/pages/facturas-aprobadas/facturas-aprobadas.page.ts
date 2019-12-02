@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FacturasService } from '../../services/facturas.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-facturas-aprobadas',
@@ -10,7 +11,7 @@ export class FacturasAprobadasPage implements OnInit {
 
   facturas: any[] = [];
 
-  constructor(private facturasService: FacturasService) { }
+  constructor(private facturasService: FacturasService, private navCtrl: NavController) { }
 
   ngOnInit() {
     this.facturasService.getFacturasAprobadas().subscribe( resp => {
@@ -20,7 +21,9 @@ export class FacturasAprobadasPage implements OnInit {
   }
 
   aceptar(factura) {
-    console.log(factura);
+    this.facturasService.selectedObject = factura;
+    const id = factura.idFactura;
+    this.navCtrl.navigateRoot(["/factura-editar", id]);
   }
 
   rechazar(factura){

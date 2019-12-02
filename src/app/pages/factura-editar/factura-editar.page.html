@@ -1,9 +1,82 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>factura-editar</ion-title>
+<ion-header no-border>
+  <ion-toolbar color="electron">
+    <ion-buttons slot="start">
+      <ion-back-button
+        color="dark"
+        defaultHref="/menu/facturas-aprobadas"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title class="text-capitalize ion-no-padding-left ion-text-center">
+      <strong>V</strong>erificacion de <strong>F</strong>acturas</ion-title
+    >
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Fecha</ion-label>
+      <ion-input
+        readonly
+        [(ngModel)]="mydate"
+        name="date"
+        (ionChange)="onChangeDate()"
+        [liIonic4Datepicker]="dataPickerObjEsMx"
+      ></ion-input>
+      <ion-icon slot="start" name="calendar"></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-label>Referencia No:</ion-label>
+      <ion-input></ion-input>
+      <ion-icon slot="start" name="document"></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-label>Memo:</ion-label>
+      <ion-input></ion-input>
+      <ion-icon slot="start" name="alert"></ion-icon>
+    </ion-item>
+  </ion-list>
 
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12" *ngFor="let concepto of conceptos">
+        <ion-card>
+
+          <ion-list>
+            <ion-item>
+              <ion-label>Producto: NOMBRE OXAMA</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{ concepto.Descripcion }}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{ concepto.Cantidad }}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{ concepto.ValorUnitario }}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{ concepto.Cantidad * concepto.valorUnitario }}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label> $0.00 </ion-label>
+            </ion-item>
+          </ion-list>
+
+          <!-- Producto: NOMBRE OXAMA
+
+          {{ concepto.Descripcion }}
+
+          {{ concepto.Cantidad }}
+
+          {{ concepto.ValorUnitario }}
+
+          {{ concepto.Cantidad * concepto.valorUnitario }}
+
+          $ 0.00 -->
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

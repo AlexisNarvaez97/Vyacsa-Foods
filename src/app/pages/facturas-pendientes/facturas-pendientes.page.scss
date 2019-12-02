@@ -1,71 +1,51 @@
-// ion-card {
-//     height: 200px;
-//     width: 200px;
-// }
+.accordion-list {
+  margin-bottom: 4px;
+  --ion-item-background: #fff;
 
-
-.state-right {
-  margin-left: 15px;
-}
-
-.archived {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.actions {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.fa-file-pdf {
-  color: white;
-  background: red;
-}
-
-.fa-file-code {
-  color: black;
-  background: white;
-}
-
-.icon-left {
-  margin: 0;
-  margin-right: 5px;
-}
-
-.icon-right {
-  margin: 0;
-}
-
-.label-right {
-  position: relative;
-  right: -101px;
-}
-
-.badge-center {
-  position: absolute;
-  top: 2px;
-}
-
-@media (max-width: 320px) {
-  ion-card {
-    margin: 0;
-    margin-bottom: 10px;
-
-    .label-right {
-      right: -64px;
-    }
-
-    .badge-center {
-      right: 8px;
-    }
+  .section, .section-ative {
+    --min-height: 58px;
   }
 }
 
-.bg-image {
-  --background: red url("/assets/arrow.svg") no-repeat;
+p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
 }
 
-// .no-scroll .scroll-content {
-//   overflow: hidden;
-// }
+ion-label {
+  margin: 0;
+}
+
+ion-icon {
+  margin: 0;
+  margin-right: 10px;
+}
+
+.icon-simple {
+  position: absolute;
+  left: 23px;
+}
+
+.section {
+  --ion-item-background: #fff;
+  --ion-item-color: #000;
+}
+
+.section-active {
+  --ion-item-background: #ced6e0;
+  --ion-item-color: #000;
+
+  ion-icon {
+    color: #fff;
+  }
+}
+
+.icon-facts {
+  position: absolute;
+  left: 45px;
+}
+
+.margin-right {
+  margin-right: 35px;
+}
