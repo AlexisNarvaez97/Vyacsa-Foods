@@ -1,0 +1,51 @@
+.accordion-list {
+    margin-bottom: 4px;
+    --ion-item-background: #fff;
+  
+    .section, .section-ative {
+      --min-height: 58px;
+    }
+  }
+  
+  p {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  
+  ion-label {
+    margin: 0;
+  }
+  
+  ion-icon {
+    margin: 0;
+    margin-right: 10px;
+  }
+  
+  .icon-simple {
+    position: absolute;
+    left: 23px;
+  }
+  
+  .section {
+    --ion-item-background: #fff;
+    --ion-item-color: #000;
+  }
+  
+  .section-active {
+    --ion-item-background: #ced6e0;
+    --ion-item-color: #000;
+  
+    ion-icon {
+      color: #fff;
+    }
+  }
+  
+  .icon-facts {
+    position: absolute;
+    left: 45px;
+  }
+  
+  .margin-right {
+    margin-right: 35px;
+  }

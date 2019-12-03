@@ -53,13 +53,19 @@ export class FacturasService {
           const numeroOrden = a.num_orden;
           const valido = a.valida;
           const estado = a.estado;
+          const idOrden = a.idOrden;
+          const fechaSubida = a.fecha_subida;
+          const idProveedor = a.idProveedor;
           return {
             nombre,
             idFactura,
             fechaCreacion,
             numeroOrden,
             valido,
-            estado
+            estado,
+            idOrden,
+            fechaSubida,
+            idProveedor
           };
         });
       })
@@ -89,10 +95,7 @@ export class FacturasService {
 
     console.log('FacturaDiferencia', facturas);
     console.log('FacturaNormal', facturaOrden);
-
-
     const formData = new FormData();
-
     formData.append('idfactura', facturaOrden.idFactura);
     formData.append('idorden', facturaOrden.idOrden);
     formData.append('idproveedor', facturaOrden.idProveedor);
@@ -105,6 +108,51 @@ export class FacturasService {
       formData.append(`items_df[${index}]`, `${val.nombre}|${val.diferencia}|${val.monto}~,`);
       // tslint:disable-next-line: max-line-length
       formData.append(`items_rec[${index}]`, `${val.nombre}|${val.cantidadSolicitada}|${val.precioUnitario}|${val.cantidadTotal}|0.00|0.00,`);
+      // tslint:disable-next-line: max-line-length
+    }
+    return this.http.post(`${URL}/credit`, formData);
+  }
+
+
+  postCreditRefacturacion(facturas, facturaOrden) {
+    console.log('FacturaDiferencia', facturas);
+    console.log('FacturaNormal', facturaOrden);
+    const formData = new FormData();
+    formData.append('idfactura', facturaOrden.idFactura);
+    formData.append('idorden', facturaOrden.idOrden);
+    formData.append('idproveedor', facturaOrden.idProveedor);
+    formData.append('total_recibida', facturas.CantidadTotal);
+    formData.append('refac_not', facturaOrden.estado); // No funciona con otro estado.
+
+    for (const [index, val] of facturas.entries()) {
+      // console.log(`Hola ${val.cantidadSolicitada} + Index ${index}`);
+      // console.log(`'item_df[${index}]', '${val.nombre}'|${val.diferencia}|${val.monto}~,`);
+      formData.append(`items_df[${index}]`, `${val.nombre}|${val.diferencia}|${val.monto}~,`);
+      // tslint:disable-next-line: max-line-length
+      // formData.append(`items_rec[${index}]`, `${val.nombre}|${val.cantidadSolicitada}|${val.precioUnitario}|${val.cantidadTotal}|0.00|0.00,`);
+      // tslint:disable-next-line: max-line-length
+    }
+    return this.http.post(`${URL}/credit`, formData);
+  }
+
+  postCreditAprobada(facturas, facturaOrden) {
+    console.log('FacturaDiferencia', facturas);
+    console.log('FacturaNormal', facturaOrden);
+    const formData = new FormData();
+    formData.append('idfactura', facturaOrden.idFactura);
+    formData.append('idorden', facturaOrden.idOrden);
+    formData.append('idproveedor', facturaOrden.idProveedor);
+    // formData.append('total_recibida', facturas.CantidadTotal);
+    formData.append('refac_not', facturaOrden.estado); // No funciona con otro estado.
+
+    const array = facturas;
+
+    for (const [index, val] of array.entries()) {
+      // console.log(`Hola ${val.cantidadSolicitada} + Index ${index}`);
+      // console.log(`'item_df[${index}]', '${val.nombre}'|${val.diferencia}|${val.monto}~,`);
+      // formData.append(`items_df[${index}]`, `${val.nombre}|${val.diferencia}|${val.monto}~,`);
+      // tslint:disable-next-line: max-line-length
+      formData.append(`items_rec[${index}]`, `${val.Descripcion}|${val.Cantidad}|${val.ValorUnitario}|${val.Importe}|0.00|0.00,`);
       // tslint:disable-next-line: max-line-length
     }
     return this.http.post(`${URL}/credit`, formData);

@@ -23,6 +23,8 @@ export class FacturaConceptosPage implements OnInit {
 
   facturaRechazada = false;
 
+  facturaAprobada = false;
+
   cantidadSolicitada;
 
   facturaRefacturacion: any;
@@ -145,8 +147,12 @@ export class FacturaConceptosPage implements OnInit {
             timer: 500
           });
           this.facturaRechazada = true;
+          this.facturaAprobada = false;
         } else {
           console.log("No hagas nada no hay diferencias", diferencias);
+          this.facturaAprobada = true;
+          this.facturaRechazada = false;
+          this.facturaService.postCredit(partidas, this.factura);
           return;
         }
       }
@@ -182,7 +188,7 @@ export class FacturaConceptosPage implements OnInit {
         ...facturaEdit
       };
 
-      facturaRefacturacion.estado = "1.2";
+      facturaRefacturacion.estado = "0";
 
       this.facturaRefacturacion = facturaRefacturacion;
 
@@ -201,7 +207,7 @@ export class FacturaConceptosPage implements OnInit {
         ...facturaEdit
       };
 
-      facturaNota.estado = "1.1";
+      facturaNota.estado = "1";
 
       this.facturaNota = facturaNota;
 
@@ -250,7 +256,7 @@ export class FacturaConceptosPage implements OnInit {
     } else {
       // tslint:disable-next-line: deprecation
       return this.facturaService
-        .postCredit(facturaDif, facturaRefacturacion)
+        .postCreditRefacturacion(facturaDif, facturaRefacturacion)
         .subscribe(resp => {
           console.log("Respuesta REFACTURACION", resp);
           this.navCtrl.navigateRoot(["menu/facturas-pendientes"]);
@@ -263,4 +269,37 @@ export class FacturaConceptosPage implements OnInit {
 
     // console.log(facturaDif);
   }
+
+
+  facturaPasada() {
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "center",
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true,
+      onOpen: toast => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      }
+    });
+
+    const partidas = this.conceptos;
+    const facturaNormal = this.factura;
+
+    facturaNormal.estado = '6';
+
+    return this.facturaService
+    .postCreditAprobada(partidas, facturaNormal)
+    .subscribe(resp => {
+      console.log("Respuesta Aprobada", resp);
+      this.navCtrl.navigateRoot(["menu/facturas-pendientes"]);
+      Toast.fire({
+        icon: "success",
+        title: "Factura guardada con exito"
+      });
+    });
+  }
+
 }

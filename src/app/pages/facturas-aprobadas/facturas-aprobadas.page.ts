@@ -9,7 +9,11 @@ import { NavController } from '@ionic/angular';
 })
 export class FacturasAprobadasPage implements OnInit {
 
+  searchFactura = "";
+
   facturas: any[] = [];
+
+  automaticClose = false;
 
   constructor(private facturasService: FacturasService, private navCtrl: NavController) { }
 
@@ -17,7 +21,24 @@ export class FacturasAprobadasPage implements OnInit {
     this.facturasService.getFacturasAprobadas().subscribe( resp => {
       console.log(resp);
       this.facturas = resp;
+      this.facturas[0].open = true;
     });
+  }
+
+  toggleSection(index) {
+
+    this.facturas[index].open = !this.facturas[index].open;
+
+    if(this.automaticClose && this.facturas[index].open) {
+      this.facturas
+      .filter((item, itemIndex) => itemIndex != index)
+      .map(item => item.open = false);
+    }
+
+  }
+
+  buscar(evento) {
+    this.searchFactura = evento.detail.value;
   }
 
   aceptar(factura) {

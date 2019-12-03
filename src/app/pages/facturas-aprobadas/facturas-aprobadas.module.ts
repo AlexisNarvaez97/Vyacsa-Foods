@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { FacturasAprobadasPageRoutingModule } from './facturas-aprobadas-routing.module';
 
 import { FacturasAprobadasPage } from './facturas-aprobadas.page';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FacturasAprobadasPageRoutingModule
+    FacturasAprobadasPageRoutingModule,
+    PipesModule
   ],
   declarations: [FacturasAprobadasPage]
 })
