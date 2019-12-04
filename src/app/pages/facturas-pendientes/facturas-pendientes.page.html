@@ -16,7 +16,7 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar> -->
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="blue-light">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -49,6 +49,7 @@
         [ngClass]="{'section-active': item.open, 'section': !item.open}"
       >
         <ion-icon
+          color="warning-design shade"
           slot="start"
           name="arrow-forward"
           *ngIf="!item.open"
@@ -78,7 +79,7 @@
               <ion-item class="ion-text-center">
                 <ion-label>{{item.fechaCreacion}}</ion-label>
                 <ion-icon
-                  color="medium"
+                  color="red-design"
                   class="icon-simple"
                   slot="start"
                   name="calendar"
@@ -90,7 +91,7 @@
               <ion-item class="ion-text-center">
                 <ion-label>{{item.fechaSubida}}</ion-label>
                 <ion-icon
-                  color="success"
+                  color="blue-design"
                   class="icon-simple"
                   slot="start"
                   name="checkmark-circle-outline"
@@ -105,7 +106,7 @@
               <ion-item class="ion-text-center">
                 <ion-label>{{item.idFactura}}</ion-label>
                 <ion-icon
-                  color="dark tint"
+                  color="blue-design"
                   class="icon-facts"
                   slot="start"
                   name="clipboard"
@@ -117,7 +118,7 @@
               <ion-item class="ion-text-center">
                 <ion-label>{{item.idOrden}}</ion-label>
                 <ion-icon
-                  color="danger shade"
+                  color="red-design"
                   class="icon-facts"
                   slot="start"
                   name="document"
@@ -130,20 +131,20 @@
               <ion-button
                 expand="full"
                 (click)="aceptar(item)"
-                color="success"
+                color="blue-design"
                 class="ion-no-margin"
               >
-                <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+                <ion-icon color="light" slot="icon-only" name="checkmark"></ion-icon>
               </ion-button>
             </ion-col>
             <ion-col size="6">
               <ion-button
                 expand="full"
                 (click)="rechazar()"
-                color="danger"
+                color="red-design"
                 class="ion-no-margin"
               >
-                <ion-icon slot="icon-only" name="close"></ion-icon>
+                <ion-icon color="light" slot="icon-only" name="close"></ion-icon>
               </ion-button>
             </ion-col>
           </ion-row>

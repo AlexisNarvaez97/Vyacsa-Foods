@@ -33,7 +33,7 @@ export class FacturasPendientesPage implements OnInit {
     this.facturasService.getFacturas().subscribe((resp: any) => {
       console.log(resp);
       this.facturas = resp;
-      this.facturas[0].open = true;
+      this.facturas[0].open = false;
     });
   }
 

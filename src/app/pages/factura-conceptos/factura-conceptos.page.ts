@@ -33,6 +33,7 @@ export class FacturaConceptosPage implements OnInit {
   cantidadProporcionada = 0;
 
   facturasDiferencias: any[] = [];
+  facturasAprobadas: any[] = [];
 
   facturaMap: { [id: string]: any } = {};
 
@@ -149,6 +150,30 @@ export class FacturaConceptosPage implements OnInit {
           this.facturaRechazada = true;
           this.facturaAprobada = false;
         } else {
+          const facturaAprobada = {
+            index,
+            cantidadTotal,
+            precioUnitario,
+            cantidadSolicitada,
+            nombre
+          };
+
+          this.facturasAprobadas.push(facturaAprobada);
+
+          if (this.facturasAprobadas.length > partidas.length) {
+            const idRepetido = this.facturasDiferencias.findIndex(
+              item => item.index === facturaAprobada.index
+            );
+            this.facturasAprobadas[idRepetido] = facturaAprobada;
+            console.log(`Rebaso el tamaño de los conceptos ${partidas.length}`);
+            this.navCtrl.navigateBack('/menu/facturas-pendientes');
+            Toast.fire({
+              icon: "error",
+              title: "¡Muchos intentos, pruebe de nuevo!"
+            });
+            this.facturasAprobadas.pop();
+            return;
+          }
           console.log("No hagas nada no hay diferencias", diferencias);
           this.facturaAprobada = true;
           this.facturaRechazada = false;
@@ -270,9 +295,7 @@ export class FacturaConceptosPage implements OnInit {
     // console.log(facturaDif);
   }
 
-
   facturaPasada() {
-
     const Toast = Swal.mixin({
       toast: true,
       position: "center",
@@ -288,18 +311,17 @@ export class FacturaConceptosPage implements OnInit {
     const partidas = this.conceptos;
     const facturaNormal = this.factura;
 
-    facturaNormal.estado = '6';
+    facturaNormal.estado = "6";
 
     return this.facturaService
-    .postCreditAprobada(partidas, facturaNormal)
-    .subscribe(resp => {
-      console.log("Respuesta Aprobada", resp);
-      this.navCtrl.navigateRoot(["menu/facturas-pendientes"]);
-      Toast.fire({
-        icon: "success",
-        title: "Factura guardada con exito"
+      .postCreditAprobada(partidas, facturaNormal)
+      .subscribe(resp => {
+        console.log("Respuesta Aprobada", resp);
+        this.navCtrl.navigateRoot(["menu/facturas-pendientes"]);
+        Toast.fire({
+          icon: "success",
+          title: "Factura guardada con exito"
+        });
       });
-    });
   }
-
 }

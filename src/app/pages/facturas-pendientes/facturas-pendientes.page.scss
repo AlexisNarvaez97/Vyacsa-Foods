@@ -33,7 +33,7 @@ ion-icon {
 }
 
 .section-active {
-  --ion-item-background: #ced6e0;
+  --ion-item-background: #fafd52;
   --ion-item-color: #000;
 
   ion-icon {
@@ -48,4 +48,8 @@ ion-icon {
 
 .margin-right {
   margin-right: 35px;
+}
+
+ion-content {
+  --background: url('/assets/blue-balls.svg') no-repeat bottom;
 }
