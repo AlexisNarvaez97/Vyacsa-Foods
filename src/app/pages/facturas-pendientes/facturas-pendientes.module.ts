@@ -9,6 +9,8 @@ import { FacturasPendientesPageRoutingModule } from './facturas-pendientes-routi
 
 import { FacturasPendientesPage } from './facturas-pendientes.page';
 import { ExpandableComponent } from '../../components/expandable/expandable.component';
+import { TranslateModule } from '@ngx-translate/core';
+// import { LanguagePopoverPageModule } from '../language-popover/language-popover.module';
 
 @NgModule({
   imports: [
@@ -16,7 +18,8 @@ import { ExpandableComponent } from '../../components/expandable/expandable.comp
     FormsModule,
     IonicModule,
     PipesModule,
-    FacturasPendientesPageRoutingModule
+    FacturasPendientesPageRoutingModule,
+    TranslateModule
   ],
   declarations: [FacturasPendientesPage, ExpandableComponent]
 })

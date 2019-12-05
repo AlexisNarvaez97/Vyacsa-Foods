@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'factura-editar/:id',
     loadChildren: () => import('./pages/factura-editar/factura-editar.module').then( m => m.FacturaEditarPageModule)
+  },
+  {
+    path: 'language-popover',
+    loadChildren: () => import('./pages/language-popover/language-popover.module').then( m => m.LanguagePopoverPageModule)
   }
 ];
 

@@ -1,0 +1,10 @@
+<ion-select
+  placeholder="Select One"
+  (ionChange)="accion($event)"
+>
+  <ion-select-option
+    *ngFor="let concepto of conceptos"
+    [value]="concepto.Descripcion"
+    >{{ concepto.Descripcion }}</ion-select-option
+  >
+</ion-select>

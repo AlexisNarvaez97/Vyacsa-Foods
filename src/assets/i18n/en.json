@@ -1,0 +1,20 @@
+{
+    "HOME": {
+        "title": "Home"
+    },
+    "CONCEPTS": {
+        "header": "Concepts"
+    },
+    "ALERT": {
+        "header": "Error",
+        "msg": "There was a problem with your operation"
+    },
+    "MENU": {
+        "pending": "Invoices pending approval",
+        "approved": "Invoices approved",
+        "graphics": "Graphics"
+    },
+    "INVOICE": {
+        "search": "Search factura..."
+    }
+}

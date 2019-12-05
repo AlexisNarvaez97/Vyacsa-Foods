@@ -152,7 +152,7 @@ export class FacturasService {
       // console.log(`'item_df[${index}]', '${val.nombre}'|${val.diferencia}|${val.monto}~,`);
       // formData.append(`items_df[${index}]`, `${val.nombre}|${val.diferencia}|${val.monto}~,`);
       // tslint:disable-next-line: max-line-length
-      formData.append(`items_rec[${index}]`, `${val.Descripcion}|${val.Cantidad}|${val.ValorUnitario}|${val.Importe}|0.00|0.00,`);
+      formData.append(`items_rec[${index}]`, `${val.nombre}|${val.cantidadTotal}|${val.precioUnitario}|${val.cantidadSolicitada}|0.00|0.00,`);
       // tslint:disable-next-line: max-line-length
     }
     return this.http.post(`${URL}/credit`, formData);

@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { FacturaEditarPage } from './factura-editar.page';
+import { LanguagePopoverPage } from './language-popover.page';
 
-describe('FacturaEditarPage', () => {
-  let component: FacturaEditarPage;
-  let fixture: ComponentFixture<FacturaEditarPage>;
+describe('LanguagePopoverPage', () => {
+  let component: LanguagePopoverPage;
+  let fixture: ComponentFixture<LanguagePopoverPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FacturaEditarPage ],
+      declarations: [ LanguagePopoverPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(FacturaEditarPage);
+    fixture = TestBed.createComponent(LanguagePopoverPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

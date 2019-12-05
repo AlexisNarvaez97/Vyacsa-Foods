@@ -1,0 +1,20 @@
+{
+    "HOME": {
+        "title": "Casa"
+    },
+    "CONCEPTS": {
+        "header": "Conceptos"
+    },
+    "ALERT": {
+        "header": "Error",
+        "msg": "Hay un problema con la operación"
+    },
+    "MENU": {
+        "pending": "Facturas pendientes por aprobar",
+        "approved": "Facturas aprobadas",
+        "graphics": "Graficas"
+    },
+    "INVOICE": {
+        "search": "Buscar factura..."
+    }
+}

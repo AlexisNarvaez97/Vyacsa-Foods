@@ -39,42 +39,39 @@
 
   <ion-grid fixed>
     <ion-row>
-      <ion-col size="12" *ngFor="let concepto of conceptos">
-        <ion-card>
-
+      <ion-col size="12">
+        <h3>// probando //</h3>
+        <ion-card *ngFor="let concepto of conceptos; let i = index">
           <ion-list>
-            <ion-item>
-              <ion-label>Producto: NOMBRE OXAMA</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>{{ concepto.Descripcion }}</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>{{ concepto.Cantidad }}</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>{{ concepto.ValorUnitario }}</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>{{ concepto.Cantidad * concepto.valorUnitario }}</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label> $0.00 </ion-label>
-            </ion-item>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label
+                  >Producto: {{ concepto.Descripcion | slice:0:15 }}</ion-label
+                >
+              </ion-item>
+            </ion-col>
+            <ion-col size="12">
+              <ion-label>Item QB</ion-label>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item>
+                <!-- <app-select [conceptos]="conceptos" (opcionSeleccionada)="valorSelect($event)" ></app-select> -->
+                <!-- <ion-select name="seleccion" placeholder="Select One" ngModel (ionChange)="cambio($event)">
+                  <ion-select-option *ngFor="let concepto of conceptos" [value]="concepto.Descripcion">{{concepto.Descripcion }}</ion-select-option>
+                </ion-select> -->
+                <ionic-selectable
+                  ngModel
+                  [items]="conceptos"
+                  itemTextField="Descripcion"
+                  [canSearch]="true"
+                  (onChange)="portChange($event)"
+                >
+                </ionic-selectable>
+              </ion-item>
+
+              <h3>{{ optionSeleccionado }}</h3>
+            </ion-col>
           </ion-list>
-
-          <!-- Producto: NOMBRE OXAMA
-
-          {{ concepto.Descripcion }}
-
-          {{ concepto.Cantidad }}
-
-          {{ concepto.ValorUnitario }}
-
-          {{ concepto.Cantidad * concepto.valorUnitario }}
-
-          $ 0.00 -->
-
         </ion-card>
       </ion-col>
     </ion-row>

@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FacturasService } from "../../services/facturas.service";
-import { NavController } from "@ionic/angular";
+import { NavController, PopoverController, AlertController } from "@ionic/angular";
 import { Router } from "@angular/router";
+import { LanguagePopoverPage } from '../language-popover/language-popover.page';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: "app-facturas-pendientes",
@@ -23,7 +25,10 @@ export class FacturasPendientesPage implements OnInit {
     private facturasService: FacturasService,
     private navCtrl: NavController,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private popoverCtrl: PopoverController,
+    private alertCtrl: AlertController,
+    private translate: TranslateService
   ) {
     // this.http.get('assets/information.json').subscribe( res => {
     //   this.information = res['items'];
@@ -44,6 +49,23 @@ export class FacturasPendientesPage implements OnInit {
   ngOnInit() {
     console.log("NgOnInit");
     this.getFacturas();
+  }
+
+  async showAlert() {
+    const alert = await this.alertCtrl.create({
+      header: this.translate.instant('ALERT.header'),
+      message: this.translate.instant('ALERT.msg'),
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  async openLanguagePopover(ev) {
+    const popover = await this.popoverCtrl.create({
+      component: LanguagePopoverPage,
+      event: ev
+    });
+    await popover.present();
   }
 
   toggleSection(index) {
