@@ -8,12 +8,14 @@ import { FacturasAprobadasPageRoutingModule } from './facturas-aprobadas-routing
 
 import { FacturasAprobadasPage } from './facturas-aprobadas.page';
 import { PipesModule } from '../../pipes/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     FacturasAprobadasPageRoutingModule,
     PipesModule
   ],

@@ -1,20 +1,36 @@
 {
     "HOME": {
-        "title": "Home"
+        "title": "Pending invoices",
+        "title-2": "Invoices approved"
     },
-    "CONCEPTS": {
-        "header": "Concepts"
+    "FACTURA": {
+        "creation_date": "Creation date",
+        "date_uploaded": "Date uploaded",
+        "invoice_ID": "Invoice ID",
+        "order_ID": "Order ID",
+        "invoice_verification": "Invoice Verification"
     },
-    "ALERT": {
-        "header": "Error",
-        "msg": "There was a problem with your operation"
+    "LOGIN": {
+        "title": "Suppliers Portal",
+        "email": "Email",
+        "password": "Password",
+        "log-in": "Log In"
     },
-    "MENU": {
-        "pending": "Invoices pending approval",
-        "approved": "Invoices approved",
-        "graphics": "Graphics"
-    },
-    "INVOICE": {
-        "search": "Search factura..."
+    "CONCEPTOS": {
+        "description": "Description",
+        "amount": "Amount",
+        "received_amount": "Received amount",
+        "actions": "Actions",
+        "option-notify": "Select one of the following options to notify the provider:",
+        "billing": "Billing",
+        "credit-note": "Credit note",
+        "items-with-difference": "Items with difference",
+        "name": "Name",
+        "difference": "Difference",
+        "accept": "Accept",
+        "cancel": "Cancel",
+        "items-to-approve": "Items to approve",
+        "quantity": "Quantity",
+        "approve": "Approve"
     }
 }

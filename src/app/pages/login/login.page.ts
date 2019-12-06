@@ -24,17 +24,6 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
-  ionViewWillEnter() {
-    this.getUsers();
-  }
-
-  getUsers() {
-    this.loginService.getUsuarios().subscribe(resp => {
-      console.log("Usuarios", resp);
-      // console.log("Usuarios", resp.email);
-    });
-  }
-
   loginUser(form) {
     const Toast = Swal.mixin({
       toast: true,
@@ -53,15 +42,15 @@ export class LoginPage implements OnInit {
 
     this.loginService.loginUser(email, password).subscribe(
       (user: any) => {
+        this.storage.set('User', user.data);
+        this.storage.set("isLogged", true);
+        this.navCtrl.navigateForward("/menu/facturas-pendientes");
+        console.log(user.data);
         console.log("Login exitoso");
         Toast.fire({
           icon: "success",
           title: "Login exitoso"
         });
-        this.navCtrl.navigateForward("/menu/facturas-pendientes");
-        // console.log(resp.data);
-        // this.storage.set("User", resp.data);
-        // this.storage.set("isLogged", true);
       },
       err => {
         if (err.error.message === "Invalid Password") {
@@ -126,9 +115,5 @@ export class LoginPage implements OnInit {
     //       timer: 1000
     //     })
     //   });
-  }
-
-  login() {
-    this.navCtrl.navigateForward("/menu/facturas-pendientes");
   }
 }

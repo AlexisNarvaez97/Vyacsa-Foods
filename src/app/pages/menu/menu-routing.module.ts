@@ -19,6 +19,18 @@ const routes: Routes = [
       {
         path: "graficas",
         loadChildren: () => import('../graficas/graficas.module').then( m => m.GraficasPageModule)
+      },
+      {
+        path: 'inicio',
+        loadChildren: () => import('../inicio/inicio.module').then( m => m.InicioPageModule)
+      },
+      {
+        path: 'reportes',
+        loadChildren: () => import('../reportes/reportes.module').then( m => m.ReportesPageModule)
+      },
+      {
+        path: 'configuracion',
+        loadChildren: () => import('../configuracion/configuracion.module').then( m => m.ConfiguracionPageModule)
       }
     ]
   },

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-menu',
@@ -9,7 +10,13 @@ import { NavController } from '@ionic/angular';
 })
 export class MenuPage implements OnInit {
 
+
   pages = [
+    {
+      title: "Inicio",
+      url: "/menu/inicio",
+      icon: "home"
+    },
     {
       title: "Facturas pendientes por aprobar",
       url: "/menu/facturas-pendientes",
@@ -24,12 +31,22 @@ export class MenuPage implements OnInit {
       title: "Graficas",
       url: "/menu/graficas",
       icon: "analytics"
+    },
+    {
+      title: "Reportes",
+      url: "/menu/reportes",
+      icon: "document"
+    },
+    {
+      title: "Configuracion",
+      url: "/menu/configuracion",
+      icon: "build"
     }
   ];
 
-  selectedPath = "";
+  selectedPath = '';
 
-  constructor(private router: Router, private navCtrl: NavController) { 
+  constructor(private router: Router, private navCtrl: NavController, private storage: Storage) { 
 
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedPath = event.url;
@@ -42,8 +59,8 @@ export class MenuPage implements OnInit {
 
   async salir() {
     // await this.storage.set('isLogged', false);
-    // this.storage.remove('User');
     this.navCtrl.navigateRoot('/login');
+    this.storage.remove('User');
   }
 
 }

@@ -11,7 +11,7 @@
                 <ion-row>
                   <ion-col size="12" class="ion-no-margin">
                     <h1>
-                      <strong>P</strong>ortal de <strong>P</strong>roveedores
+                      {{ 'LOGIN.title' | translate }}
                     </h1>
                   </ion-col>
                 </ion-row>
@@ -19,13 +19,13 @@
                   <ion-col>
                     <ion-item>
                       <ion-label color="light" position="floating"
-                        >Email</ion-label
+                        >{{ 'LOGIN.email' | translate }}</ion-label
                       >
                       <ion-input type="email" name="email" [(ngModel)]="email" required></ion-input>
                     </ion-item>
                     <ion-item>
                       <ion-label color="light" position="floating"
-                        >Password</ion-label
+                        >{{ 'LOGIN.password' | translate }}</ion-label
                       >
                       <ion-input
                         type="password"
@@ -37,7 +37,7 @@
                 </ion-row>
                 <ion-row>
                   <ion-col>
-                    <button type="submit" [disabled]="f.invalid" class="btn btn-danger btn-lg btn-block button-ingresar">Ingresar</button>
+                    <button type="submit" [disabled]="f.invalid" class="btn btn-danger btn-lg btn-block button-ingresar">{{ 'LOGIN.log-in' | translate}}</button>
                   </ion-col>
                 </ion-row>
               </ion-grid>
