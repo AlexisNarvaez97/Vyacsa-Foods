@@ -4,19 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPageRoutingModule } from './login-routing.module';
+import { ConfiguracionPageRoutingModule } from './configuracion-routing.module';
 
-import { LoginPage } from './login.page';
-import { TranslateModule } from '@ngx-translate/core';
+import { ConfiguracionPage } from './configuracion.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TranslateModule,
-    LoginPageRoutingModule
+    ConfiguracionPageRoutingModule
   ],
-  declarations: [LoginPage]
+  declarations: [ConfiguracionPage]
 })
-export class LoginPageModule {}
+export class ConfiguracionPageModule {}

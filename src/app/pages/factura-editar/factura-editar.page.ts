@@ -7,28 +7,15 @@ import { ActivatedRoute } from "@angular/router";
 
 import { IonicSelectableComponent } from "ionic-selectable";
 
-class Port {
-  public id: number;
-  public name: string;
-}
-
 @Component({
   selector: "app-factura-editar",
   templateUrl: "./factura-editar.page.html",
   styleUrls: ["./factura-editar.page.scss"]
 })
 export class FacturaEditarPage implements OnInit {
-
-  @ViewChild('portComponent', null) portComponent: IonicSelectableComponent;
-
-  ports: Port[];
-  port;
-
   optionSeleccionado;
 
   selectedDate;
-
- data: any[] = [];
 
   mydate = "";
 
@@ -40,6 +27,10 @@ export class FacturaEditarPage implements OnInit {
   emisor: any[] = [];
   impuestos: any[] = [];
   conceptos: any[] = [];
+
+  opcionBill;
+
+  facturasBill: any[] = [];
 
   factura;
   constructor(
@@ -57,8 +48,10 @@ export class FacturaEditarPage implements OnInit {
     // console.log('AVER', this.optionSeleccionado);
   }
 
-  portChange(event: { component: IonicSelectableComponent; value: any }) {
-    console.log("port:", event.value);
+  opcionCambiante(event: { component: IonicSelectableComponent; value: any }) {
+    // Se almacena la opcion del selectable
+    this.opcionBill = event.value.Descripcion;
+    console.log("Opcion:", event.value.Descripcion);
     // console.log('Referencia alv', this.portComponent);
   }
 
@@ -70,20 +63,46 @@ export class FacturaEditarPage implements OnInit {
       // Validar el array
       if (factura.conceptos.length > 1) {
         this.conceptos = factura.conceptos;
-        this.data = factura.conceptos;
       } else {
         this.conceptos.push(factura.conceptos);
-        this.data.push(factura.conceptos);
       }
       console.log(this.conceptos);
     });
   }
 
-  valorSelect(ev) {
+  validarFactura(idFactura) {
+    const bienesAprobados = this.conceptos;
 
-    console.log('data example');
-    console.log(ev);
+    for (const [id, factura] of bienesAprobados.entries()) {
+      if (id === idFactura) {
+        const opcionBill = this.opcionBill;
+        // console.log(factura);
+        const nuevaFactura = {
+          id,
+          ...factura,
+          opcionBill
+        };
 
+        // console.log(nuevaFactura);
+        // console.log(nuevaFactura.opcionBill);
+
+        this.facturasBill.push(nuevaFactura);
+
+        console.log("FacturasBill", this.facturasBill);
+
+        if (this.facturasBill.length > this.conceptos.length) {
+          const idRepetido = this.facturasBill.findIndex(
+            item => item.index === nuevaFactura.id
+          );
+          this.facturasAprobadas[idRepetido] = nuevaFactura;
+          console.log(`Rebaso el tamaño de los conceptos ${this.conceptos.length}`);
+          this.facturasBill.pop();
+          return;
+        }
+      }
+    }
+
+    console.log(idFactura);
   }
 
   ngOnInit() {
@@ -139,11 +158,10 @@ export class FacturaEditarPage implements OnInit {
     return Number(cantidad * unitario).toFixed(2);
   }
 
-
-  cambio(evento) {
-
-    console.log('event', evento);
-
+  enviarData(form) {
+    console.log('ENVIAR AL ENDPOINT');
+    console.log(form.value);
+    console.log(this.facturasBill);
   }
 
 }

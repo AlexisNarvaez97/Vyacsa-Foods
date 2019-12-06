@@ -7,7 +7,8 @@
       ></ion-back-button>
     </ion-buttons>
     <ion-title class="text-capitalize ion-no-padding-left ion-text-center">
-      <strong>V</strong>erificacion de <strong>F</strong>acturas</ion-title
+      {{ 'FACTURA.invoice_verification' | translate }}
+      </ion-title
     >
   </ion-toolbar>
 </ion-header>
@@ -17,10 +18,10 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th class="ion-text-center">Descripción</th>
-        <th class="ion-text-center">Monto</th>
-        <th class="ion-text-center">Cantidad Recibida</th>
-        <th class="ion-text-center">Acciones</th>
+        <th class="ion-text-center">{{ 'CONCEPTOS.description' | translate }}</th>
+        <th class="ion-text-center">{{ 'CONCEPTOS.amount' | translate }}</th>
+        <th class="ion-text-center">{{ 'CONCEPTOS.received_amount' | translate }}</th>
+        <th class="ion-text-center">{{ 'CONCEPTOS.actions' | translate }}</th>
       </tr>
     </thead>
     <tbody>
@@ -72,21 +73,20 @@
       <ion-radio-group (ionSelect)="changeRadio($event)">
         <div class="col-12" style="margin: 15px 0px;">
           <ion-label class="ion-text-center notificaciones">
-            Seleccione una de las siguientes opciones para notificar al
-            proveedor:
+            {{'CONCEPTOS.option-notify' | translate }}
           </ion-label>
         </div>
 
         <div class="col">
           <ion-item class="ion-no-margin ion-text-center">
-            <ion-label>Refacturación</ion-label>
+            <ion-label>{{ 'CONCEPTOS.billing' | translate }}</ion-label>
             <ion-radio color="primary" value="factura"></ion-radio>
             <ion-icon color="primary" slot="start" name="calendar"></ion-icon>
           </ion-item>
         </div>
         <div class="col">
           <ion-item class="ion-no-margin ion-text-center">
-            <ion-label>Nota de crédito</ion-label>
+            <ion-label>{{ 'CONCEPTOS.credit-note' | translate }}</ion-label>
             <ion-radio color="danger" value="nota"></ion-radio>
             <ion-icon color="dark" slot="start" name="document"></ion-icon>
           </ion-item>
@@ -100,17 +100,17 @@
   <ion-row>
 
     <ion-col class="ion-text-center" size="12">
-      <ion-label>Artículos con diferencia</ion-label>
+      <ion-label>{{ 'CONCEPTOS.items-with-difference' | translate }}</ion-label>
     </ion-col>
     
     <ion-col class="ion-text-center" size="4">
-      <ion-label>Nombre</ion-label>
+      <ion-label> {{ 'CONCEPTOS.name' | translate }} </ion-label>
     </ion-col>
     <ion-col class="ion-text-center" size="4">
-      <ion-label>Diferencia</ion-label>
+      <ion-label> {{ 'CONCEPTOS.difference' | translate }} </ion-label>
     </ion-col>
     <ion-col class="ion-text-center" size="4">
-      <ion-label>Monto</ion-label>
+      <ion-label>{{ 'CONCEPTOS.amount' | translate }}</ion-label>
     </ion-col>
 
 
@@ -144,7 +144,7 @@
   <ion-row>
     <ion-col size="6">
       <ion-button color="primary" expand="block" fill="outline" (click)="aceptarFactura()"
-      >Aceptar</ion-button
+      >{{ 'CONCEPTOS.accept' | translate }}</ion-button
       >
     </ion-col>
     
@@ -154,7 +154,7 @@
       expand="block"
       fill="outline"
       routerLink="/menu/facturas-pendientes"
-      >Cancelar</ion-button
+      >{{ 'CONCEPTOS.cancel' | translate }}</ion-button
       >
     </ion-col>
   </ion-row>
@@ -167,17 +167,17 @@
   <ion-row>
 
     <ion-col class="ion-text-center" size="12">
-      <ion-label>Artículos para aprobar</ion-label>
+      <ion-label>{{ 'CONCEPTOS.items-to-approve' | translate }}</ion-label>
     </ion-col>
     
     <ion-col class="ion-text-center" size="4">
-      <ion-label>Nombre</ion-label>
+      <ion-label>{{ 'CONCEPTOS.name' | translate }}</ion-label>
     </ion-col>
     <ion-col class="ion-text-center" size="4">
-      <ion-label>Importe</ion-label>
+      <ion-label> {{ 'CONCEPTOS.amount' | translate }} </ion-label>
     </ion-col>
     <ion-col class="ion-text-center" size="4">
-      <ion-label>Cantidad</ion-label>
+      <ion-label>{{ 'CONCEPTOS.quantity' | translate }}</ion-label>
     </ion-col>
 
 
@@ -211,7 +211,7 @@
   <ion-row>
     <ion-col size="6">
       <ion-button color="success" expand="block" fill="outline" (click)="facturaPasada()"
-      >Aprobar</ion-button
+      >{{ 'CONCEPTOS.approve' | translate }}</ion-button
       >
     </ion-col>
     
@@ -221,7 +221,7 @@
       expand="block"
       fill="outline"
       routerLink="/menu/facturas-pendientes"
-      >Cancelar</ion-button
+      >{{ 'CONCEPTOS.cancel' | translate }}</ion-button
       >
     </ion-col>
   </ion-row>
