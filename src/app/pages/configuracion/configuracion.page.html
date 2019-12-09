@@ -8,9 +8,24 @@
 </ion-header>
 
 <ion-content>
-  <h1>Cambiar idioma</h1>
+  <ion-list>
+    <ion-item>
+      <ion-icon slot="start" name="text"></ion-icon>
+      <ion-label>Cambiar Idioma</ion-label>
+      <ion-button expand="full" (click)="openLanguagePopover($event)">
+        <ion-icon slot="icon-only" name="chatboxes"></ion-icon>
+      </ion-button>
+    </ion-item>
 
-  <ion-button expand="full" (click)="openLanguagePopover($event)">
-    <ion-icon slot="icon-only" name="more"></ion-icon>
-  </ion-button>
+    <ion-item>
+      <ion-icon slot="start" name="moon"></ion-icon>
+      <ion-label>Modo Oscuro</ion-label>
+      <ion-toggle
+        slot="end"
+        [ngModel]="darkMode"
+        [checked]="darkMode"
+        (ionChange)="cambio()"
+      ></ion-toggle>
+    </ion-item>
+  </ion-list>
 </ion-content>

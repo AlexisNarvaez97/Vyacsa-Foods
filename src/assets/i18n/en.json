@@ -32,5 +32,19 @@
         "items-to-approve": "Items to approve",
         "quantity": "Quantity",
         "approve": "Approve"
+    },
+    "EDIT": {
+        "title": "Invoice Verification",
+        "date": "Date",
+        "reference": "Reference",
+        "memo": "Memorandum",
+        "items": "Add QBs items",
+        "product": "Product",   
+        "unit-value": "Unit Value",
+        "item-QB": "Item QB",
+        "quantity": "Quantity",
+        "amount": "Amount",
+        "key": "Key",
+        "approve": "Approve"
     }
 }

@@ -23,7 +23,7 @@
         "actions": "Acciones",
         "option-notify": "Seleccione una de las siguientes opciones para notificar al proveedor:",
         "billing": "Refacturacion",
-        "credit note": "Nota de credito",
+        "credit-note": "Nota de credito",
         "items-with-difference": "Articulos con diferencia",
         "name": "Nombre",
         "difference": "Diferencias",
@@ -32,6 +32,19 @@
         "items-to-approve": "Articulos para aprobar",
         "quantity": "Cantidad",
         "approve": "Aprobar"
-
+    },
+    "EDIT": {
+        "title": "Verificacion de facturas",
+        "date": "Fecha",
+        "reference": "Referencia",
+        "memo": "Memo",
+        "items": "Agregar Item QBs",
+        "product": "Producto",
+        "unit-value": "Valor Unitario",
+        "item-QB": "Item QB",
+        "quantity": "Cantidad",
+        "amount": "Importe",
+        "key": "Clave",
+        "approve": "Aprobar"
     }
 }

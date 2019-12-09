@@ -12,12 +12,14 @@ import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
 
 import { IonicSelectableModule } from 'ionic-selectable';
 import { SelectComponent } from '../../components/select/select.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     Ionic4DatepickerModule,
     IonicSelectableModule,
     FacturaEditarPageRoutingModule

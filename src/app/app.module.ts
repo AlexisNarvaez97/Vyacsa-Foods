@@ -26,6 +26,8 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 // Picker
 import { Ionic4DatepickerModule } from "@logisticinfotech/ionic4-datepicker";
 
+import { ChartsModule } from 'ng2-charts';
+
 // Selectable
 import { IonicSelectableModule } from "ionic-selectable";
 import { LanguagePopoverPageModule } from "./pages/language-popover/language-popover.module";
@@ -43,6 +45,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     Ionic4DatepickerModule,
     HttpClientModule,
+    ChartsModule,
     IonicSelectableModule,
     PipesModule,
     LanguagePopoverPageModule,
