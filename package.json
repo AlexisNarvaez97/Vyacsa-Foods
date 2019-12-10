@@ -39,6 +39,7 @@
     "cordova-sqlite-storage": "^3.4.0",
     "core-js": "^2.5.4",
     "ionic-selectable": "^4.5.0",
+    "ionic4-hidenav": "^0.1.2",
     "moment": "^2.24.0",
     "ng2-charts": "^2.3.0",
     "pdfmake": "^0.1.62",

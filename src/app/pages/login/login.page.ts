@@ -12,6 +12,10 @@ import Swal from "sweetalert2";
   styleUrls: ["./login.page.scss"]
 })
 export class LoginPage implements OnInit {
+
+
+  show: boolean;
+
   userData: any[] = [];
   email = "vrodriguez@intekelfinancer.com";
 
@@ -22,7 +26,13 @@ export class LoginPage implements OnInit {
     private loginService: LoginService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.storage.get("User").then(user => {
+      if (user) {
+        this.navCtrl.navigateForward(["/menu/inicio"]);
+      }
+    });
+  }
 
   loginUser(form) {
     const Toast = Swal.mixin({
@@ -42,9 +52,10 @@ export class LoginPage implements OnInit {
 
     this.loginService.loginUser(email, password).subscribe(
       (user: any) => {
-        this.storage.set('User', user.data);
+        this.show = true;
+        this.storage.set("User", user.data);
         this.storage.set("isLogged", true);
-        this.navCtrl.navigateForward("/menu/facturas-pendientes");
+        this.navCtrl.navigateForward("/menu/inicio");
         console.log(user.data);
         console.log("Login exitoso");
         Toast.fire({
@@ -83,37 +94,7 @@ export class LoginPage implements OnInit {
             timer: 1000
           });
         }
-        // console.log(err.error.message);
-        // console.log('El famoso error', err);
-        // console.log('Login fallido');
-        // console.log('Error', err);
       }
     );
-
-    // this.authService
-    //   .loginUser(value)
-    //   .then(user => {
-    //     if (user) {
-    //       this.storage.set("isLogged", true);
-    //       this.storage.set("currentUser", user);
-    //       this.router.navigateByUrl('/menu/facturas-pendientes');
-    //       Swal.fire({
-    //         position: 'center',
-    //         type: 'success',
-    //         title: 'Login con exito...',
-    //         showConfirmButton: false,
-    //         timer: 1000
-    //       })
-    //     }
-    //   })
-    //   .catch(error => {
-    //     Swal.fire({
-    //       position: 'center',
-    //       type: 'error',
-    //       title: error,
-    //       showConfirmButton: false,
-    //       timer: 1000
-    //     })
-    //   });
   }
 }

@@ -219,6 +219,9 @@ export class FacturaConceptosPage implements OnInit {
 
       // console.log("Refacturacion", facturaRefacturacion);
 
+
+      // Obtener el email del localstorage y agregar el video.
+
       this.emailComposer.open({
         app: "gmail",
         to: "alexisnarvaez97@hotmail.com",

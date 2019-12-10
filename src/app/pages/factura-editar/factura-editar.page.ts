@@ -66,7 +66,7 @@ export class FacturaEditarPage implements OnInit {
       } else {
         this.conceptos.push(factura.conceptos);
       }
-      console.log(this.conceptos);
+      // console.log(this.conceptos);
     });
   }
 
@@ -107,7 +107,7 @@ export class FacturaEditarPage implements OnInit {
 
   ngOnInit() {
     this.dataPickerObjEsMx = {
-      dateFormat: "YYYY-MM-DD",
+      dateFormat: "DD/MM/YYYY",
       closeOnSelect: true,
       setLabel: "OK",
       todayLabel: "Hoy",
@@ -161,7 +161,13 @@ export class FacturaEditarPage implements OnInit {
   enviarData(form) {
     console.log('ENVIAR AL ENDPOINT');
     console.log(form.value);
-    console.log(this.facturasBill);
+    console.log(this.factura);
+
+    // console.log(this.facturasBill);
+
+    this.facturaService.postGuardarBill(form.value, this.factura, this.facturasBill).subscribe( resp => {
+      console.log('Response', resp);
+    });
   }
 
 }

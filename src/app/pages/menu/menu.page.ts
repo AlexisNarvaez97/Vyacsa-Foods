@@ -27,13 +27,13 @@ export class MenuPage implements OnInit {
       url: "/menu/facturas-aprobadas",
       icon: "folder-open"
     },
+    // {
+    //   title: "Graficas",
+    //   url: "/menu/graficas",
+    //   icon: "analytics"
+    // },
     {
       title: "Graficas",
-      url: "/menu/graficas",
-      icon: "analytics"
-    },
-    {
-      title: "Reportes",
       url: "/menu/reportes",
       icon: "document"
     },
@@ -61,6 +61,7 @@ export class MenuPage implements OnInit {
     // await this.storage.set('isLogged', false);
     this.navCtrl.navigateRoot('/login');
     this.storage.remove('User');
+    this.storage.remove('isLogged');
   }
 
 }

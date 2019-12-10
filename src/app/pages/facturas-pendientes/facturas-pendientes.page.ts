@@ -1,10 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from "@angular/common/http";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FacturasService } from "../../services/facturas.service";
-import { NavController, PopoverController, AlertController } from "@ionic/angular";
+import {
+  NavController,
+  PopoverController,
+  AlertController
+} from "@ionic/angular";
 import { Router } from "@angular/router";
-import { LanguagePopoverPage } from '../language-popover/language-popover.page';
-import { TranslateService } from '@ngx-translate/core';
+import { LanguagePopoverPage } from "../language-popover/language-popover.page";
+import { TranslateService } from "@ngx-translate/core";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-facturas-pendientes",
@@ -53,9 +58,9 @@ export class FacturasPendientesPage implements OnInit {
 
   async showAlert() {
     const alert = await this.alertCtrl.create({
-      header: this.translate.instant('ALERT.header'),
-      message: this.translate.instant('ALERT.msg'),
-      buttons: ['OK']
+      header: this.translate.instant("ALERT.header"),
+      message: this.translate.instant("ALERT.msg"),
+      buttons: ["OK"]
     });
     alert.present();
   }
@@ -69,15 +74,13 @@ export class FacturasPendientesPage implements OnInit {
   }
 
   toggleSection(index) {
-
     this.facturas[index].open = !this.facturas[index].open;
 
-    if(this.automaticClose && this.facturas[index].open) {
+    if (this.automaticClose && this.facturas[index].open) {
       this.facturas
-      .filter((item, itemIndex) => itemIndex != index)
-      .map(item => item.open = false);
+        .filter((item, itemIndex) => itemIndex != index)
+        .map(item => (item.open = false));
     }
-
   }
 
   // toggleItem(index, childIndex) {
@@ -88,9 +91,7 @@ export class FacturasPendientesPage implements OnInit {
     // this.facturasService.getFacturas().subscribe((resp: any) => {
     //   // console.log(resp);
     //   this.facturas = resp;
-
     //   console.log('Probando');
-
     //   console.log(this.facturas[0]);
     //   console.log(this.facturas[1]);
     //   console.log(this.facturas[2]);
@@ -105,7 +106,42 @@ export class FacturasPendientesPage implements OnInit {
 
   openLocalPdf() {}
 
-  rechazar() {}
+  async rechazar(factura) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      onOpen: toast => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      }
+    });
+
+    const { value: text } = await Swal.fire({
+      icon: "error",
+      title: "¿Estas seguro de rechazar?",
+      input: "textarea",
+      inputPlaceholder: "Razon de rechazo...",
+      inputAttributes: {
+        "aria-label": "Razon de rechazo"
+      },
+      showCancelButton: true
+    });
+    if (text) {
+      console.log(factura);
+      this.facturasService
+        .postRechazarFactura(factura, text)
+        .subscribe((resp: any) => {
+          Toast.fire({
+            icon: "success",
+            title: `${resp.message}`
+          });
+          console.log(resp);
+        });
+    }
+  }
 
   aceptar(factura) {
     this.facturasService.selectedObject = factura;
@@ -113,7 +149,5 @@ export class FacturasPendientesPage implements OnInit {
     this.navCtrl.navigateRoot(["/factura-conceptos", id]);
   }
 
-  onClick() {
-    
-  }
+  onClick() {}
 }

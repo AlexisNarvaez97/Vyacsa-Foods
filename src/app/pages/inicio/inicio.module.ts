@@ -8,10 +8,13 @@ import { InicioPageRoutingModule } from './inicio-routing.module';
 
 import { InicioPage } from './inicio.page';
 
+import { HidenavModule } from 'ionic4-hidenav';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    HidenavModule,
     IonicModule,
     InicioPageRoutingModule
   ],

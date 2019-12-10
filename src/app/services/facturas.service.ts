@@ -25,6 +25,8 @@ export class FacturasService {
           const valido = a.valido;
           const estado = a.estado;
           const idOrden = a.idOrden;
+          const idQB = a.Qbid;
+          const email = a.email;
           const fechaSubida = a.fecha_subida;
           const idProveedor = a.idProveedor;
           return {
@@ -33,6 +35,8 @@ export class FacturasService {
             fechaCreacion,
             numeroOrden,
             idOrden,
+            idQB,
+            email,
             idProveedor,
             fechaSubida,
             valido,
@@ -53,6 +57,7 @@ export class FacturasService {
           const numeroOrden = a.num_orden;
           const valido = a.valida;
           const estado = a.estado;
+          const idQB = a.Qbid;
           const idOrden = a.idOrden;
           const fechaSubida = a.fecha_subida;
           const idProveedor = a.idProveedor;
@@ -61,6 +66,7 @@ export class FacturasService {
             idFactura,
             fechaCreacion,
             numeroOrden,
+            idQB,
             valido,
             estado,
             idOrden,
@@ -157,4 +163,43 @@ export class FacturasService {
     }
     return this.http.post(`${URL}/credit`, formData);
   }
+
+
+
+  postGuardarBill(form, factura, facturasBill) {
+
+    console.log(form);
+    console.log(factura);
+    console.log(facturasBill);
+
+    const formData = new FormData();
+    formData.append('factura', factura.idFactura);
+    formData.append('orden', factura.idOrden);
+    formData.append('datepicker', form.date);
+    formData.append('total_descuento', '0');
+    formData.append('referencia', form.Referencia);
+    formData.append('memo', form.Memo);
+
+    const array = facturasBill;
+
+    for (const [index, val] of array.entries()) {
+      formData.append(`itms_exp[${index}]`, `${factura.idQB}|${val.Descripcion}|${val.Cantidad}|${val.ValorUnitario}|${val.Importe}|Items|0.00,`);
+    }
+    return this.http.post(`${URL}/guardarBills`, formData);
+  }
+
+
+  postRechazarFactura(factura, text) {
+
+    const formData = new FormData();
+    formData.append('rechazo', '2');
+    formData.append('razon', text);
+    formData.append('ordencompra', factura.idOrden);
+
+    return this.http.post(`${URL}/rechazarFactura`, formData);
+  }
+
+
+
+
 }
