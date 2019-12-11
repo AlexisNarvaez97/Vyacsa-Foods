@@ -1,9 +1,9 @@
-<hidenav-stretchheader header-height="50">
+<hidenav-stretchheader header-height="50" opacity-factor="7" opacity-color="white" init-expanded="true" no-border>
   <ion-toolbar color="none" #static>
     <ion-buttons slot="start">
       <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
-    <ion-title color="light" (click)="expand()" class="ion-text-center">Inicio</ion-title>
+    <ion-title color="light" (click)="expand()" class="ion-text-center">{{ "INICIO.title" | translate }}</ion-title>
   </ion-toolbar>
 
   <div #shrinkexpand (click)="expand()">
@@ -12,11 +12,18 @@
 </hidenav-stretchheader>
 
 <ion-content class="ion-padding" hidenav-sh-content>
+
   <ion-button expand="full" (click)="menu()">
-    Abrir Menu
+    {{ "INICIO.open-m" | translate }}
   </ion-button>
 
-  <ion-button expand="full" routerLink="/menu/facturas-pendientes">
-    Abrir Facturas Pendientes
+  <ion-button color="warning" expand="full" routerLink="/menu/facturas-pendientes">
+    {{ "INICIO.open-f" | translate }}
   </ion-button>
+
+  <ion-button color="danger" expand="full" routerLink="/menu/facturas-rechazadas">
+    {{ "INICIO.open-r" | translate }}
+  </ion-button>
+
+
 </ion-content>

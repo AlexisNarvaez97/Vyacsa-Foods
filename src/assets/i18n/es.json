@@ -46,5 +46,19 @@
         "amount": "Importe",
         "key": "Clave",
         "approve": "Aprobar"
+    },
+    "REPORTS": {
+        "title": "Reportes"
+    },
+    "CONFI": {
+        "title": "Configuracion",
+        "change": "Cambiar Idioma",
+        "dark": "Modo Oscuro"
+    },
+    "INICIO": {
+        "title": "Inicio",
+        "open-m": "Abrir Menu",
+        "open-f": "Abrir Facturas Pendientes",
+        "open-r": "Abrir Facturas Rechazadas"
     }
 }

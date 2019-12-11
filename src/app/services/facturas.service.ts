@@ -78,6 +78,48 @@ export class FacturasService {
     );
   }
 
+  getFacturasRechazadas() {
+    return this.http.get(`${URL}/facturasRechazadas`)
+    .pipe(
+      map((resp: any) => {
+        return resp.map(a => {
+          const nombre = a.nombre;
+          const idFactura = a.idFactura;
+          const fechaCreacion = a.fecha_creacion;
+          const numeroOrden = a.num_orden;
+          const valido = a.valida;
+          const estado = a.estado;
+          const idQB = a.Qbid;
+          const idOrden = a.idOrden;
+          const fechaSubida = a.fecha_subida;
+          const idProveedor = a.idProveedor;
+          const razonRechazo = a.razon_rechazo;
+          return {
+            nombre,
+            idFactura,
+            fechaCreacion,
+            numeroOrden,
+            idQB,
+            valido,
+            estado,
+            idOrden,
+            fechaSubida,
+            idProveedor,
+            razonRechazo
+          };
+        });
+      })
+    );
+  }
+
+  getFacturasNotas() {
+    return this.http.get(`${URL}/facturasNotas`);
+  }
+
+  getFacturasRefacturacion() {
+    return this.http.get(`${URL}/facturasRefacturacion`);
+  }
+
   getXml(facturaId) {
     const formData = new FormData();
     formData.append("factura_id", facturaId);

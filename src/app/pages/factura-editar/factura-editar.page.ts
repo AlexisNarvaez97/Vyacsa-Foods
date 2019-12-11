@@ -1,11 +1,14 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { ModalController } from "@ionic/angular";
+import { ModalController, NavController } from '@ionic/angular';
 
 import { Ionic4DatepickerModalComponent } from "@logisticinfotech/ionic4-datepicker";
 import { FacturasService } from "../../services/facturas.service";
 import { ActivatedRoute } from "@angular/router";
 
 import { IonicSelectableComponent } from "ionic-selectable";
+
+import Swal from "sweetalert2";
+
 
 @Component({
   selector: "app-factura-editar",
@@ -36,7 +39,8 @@ export class FacturaEditarPage implements OnInit {
   constructor(
     public modalCtrl: ModalController,
     private facturaService: FacturasService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private navCtrl: NavController
   ) {
     const id = this.route.snapshot.paramMap.get("id");
     this.getFactura(id);
@@ -159,6 +163,19 @@ export class FacturaEditarPage implements OnInit {
   }
 
   enviarData(form) {
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      onOpen: toast => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      }
+    });
+
     console.log('ENVIAR AL ENDPOINT');
     console.log(form.value);
     console.log(this.factura);
@@ -167,6 +184,11 @@ export class FacturaEditarPage implements OnInit {
 
     this.facturaService.postGuardarBill(form.value, this.factura, this.facturasBill).subscribe( resp => {
       console.log('Response', resp);
+      Toast.fire({
+        icon: "success",
+        title: `Factura guardada`
+      });
+      this.navCtrl.navigateForward(['/menu/facturas-pendientes']);
     });
   }
 

@@ -9,12 +9,14 @@ import { InicioPageRoutingModule } from './inicio-routing.module';
 import { InicioPage } from './inicio.page';
 
 import { HidenavModule } from 'ionic4-hidenav';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     HidenavModule,
+    TranslateModule,
     IonicModule,
     InicioPageRoutingModule
   ],

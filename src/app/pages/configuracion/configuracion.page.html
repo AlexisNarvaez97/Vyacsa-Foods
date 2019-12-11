@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">Configuracion</ion-title>
+    <ion-title class="ion-text-center">{{ 'CONFI.title' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
   <ion-list>
     <ion-item>
       <ion-icon slot="start" name="text"></ion-icon>
-      <ion-label>Cambiar Idioma</ion-label>
+      <ion-label>{{ 'CONFI.change' | translate }}</ion-label>
       <ion-button expand="full" (click)="openLanguagePopover($event)">
         <ion-icon slot="icon-only" name="chatboxes"></ion-icon>
       </ion-button>
@@ -19,7 +19,7 @@
 
     <ion-item>
       <ion-icon slot="start" name="moon"></ion-icon>
-      <ion-label>Modo Oscuro</ion-label>
+      <ion-label>{{ 'CONFI.dark' | translate }}</ion-label>
       <ion-toggle
         slot="end"
         [ngModel]="darkMode"

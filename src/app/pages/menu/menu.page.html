@@ -1,32 +1,38 @@
 <ion-split-pane contentId="main-content">
-
-  
   <ion-menu contentId="main-content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menu</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    
     <ion-content>
       <ion-list>
-        <ion-menu-toggle auto-hide="false" *ngFor="let p of pages"> 
-          <ion-item [routerLink]="p.url" routerDirection="root" [class.active-item]="selectedPath === p.url">
-            <ion-icon [name]="p.icon" slot="start"></ion-icon>
-            {{ p.title }}
+        <ion-card class="margin-bottom">
+          <img src="https://images.pexels.com/photos/273222/pexels-photo-273222.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+          <ion-card-header>
+            <ion-card-subtitle>Departamento Almacen</ion-card-subtitle>
+            <ion-card-title>Menu</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label>{{ date }} - {{ horaImprimible }}</ion-label>
+          </ion-card-content>
+        </ion-card>
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
+          <ion-item
+            [routerLink]="p.url"
+            routerDirection="root"
+            [class.active-item]="selectedPath === p.url"
+            detail
+            lines="none"
+            class="ion-no-padding padding-left"
+          >
+            <ion-icon [name]="p.icon" slot="start" class="ion-no-margin ion-no-padding"></ion-icon>
+            <ion-title>{{ p.title }}</ion-title>
           </ion-item>
-        </ion-menu-toggle>   
+        </ion-menu-toggle>
       </ion-list>
     </ion-content>
-    
-    
-    <ion-button (click)="salir()">
-      Salir
+
+    <ion-button shape="round" fill="outline" class="mb-2" color="danger" (click)="salir()">
+        <ion-icon name="log-out" color="danger" slot="start"></ion-icon>
+      Salir 
     </ion-button>
-    
-    
   </ion-menu>
-  
+
   <ion-router-outlet id="main-content" main></ion-router-outlet>
-  
 </ion-split-pane>

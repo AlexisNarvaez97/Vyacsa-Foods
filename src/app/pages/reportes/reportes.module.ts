@@ -9,11 +9,13 @@ import { IonicModule } from '@ionic/angular';
 import { ReportesPageRoutingModule } from './reportes-routing.module';
 
 import { ReportesPage } from './reportes.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule,
     IonicModule,
     ChartsModule,
     ReportesPageRoutingModule

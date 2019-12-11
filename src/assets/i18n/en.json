@@ -46,5 +46,24 @@
         "amount": "Amount",
         "key": "Key",
         "approve": "Approve"
+    },
+    "REPORTS": {
+        "title": "Reports"
+    },
+    "CONFI": {
+        "title": "Settings",
+        "change": "Change Language",
+        "dark": "Dark Mode"
+    },
+    "INICIO": {
+        "title": "Home",
+        "open-m": "Open Menu",
+        "open-f": "Open Pending Invoices"
+    },
+    "INICIO": {
+        "title": "Home",
+        "open-m": "Open Menu",
+        "open-f": "Open Pending Invoices",
+        "open-r": "Open Rejected Invoices"
     }
 }

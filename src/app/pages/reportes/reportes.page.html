@@ -3,47 +3,22 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">Reportes</ion-title>
+    <ion-title class="ion-text-center">{{ 'REPORTS.title' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <!-- <div>
-    <div>
-      <div style="display: block">
-        <canvas
-          baseChart
-          [datasets]="barChartData"
-          [labels]="barChartLabels"
-          [chartType]="barChartType">
-        >
-        </canvas>
-      </div>
-      <button
-        mat-button
-        mat-raised-button
-        color="primary"
-        (click)="randomize()"
-      >
-        Update
-      </button>
-    </div>
-  </div> -->
+
   <ion-grid fixed>
+ 
     <ion-row>
       <ion-col size="12">
         <ion-card>
-          <canvas id="receipts" width="150" height="80"></canvas>
-          <!-- <canvas id="pie-chart" width="800" height="450"></canvas> -->
+            <canvas id="bar-chart" width="200" height="380"></canvas>
         </ion-card>
       </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col size="12">
-        <ion-card>
-            <canvas id="bar-chart" width="150" height="100"></canvas>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+
+
   </ion-grid>
 </ion-content>

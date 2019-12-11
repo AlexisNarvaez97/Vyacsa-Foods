@@ -1,0 +1,112 @@
+<ion-header>
+    <ion-toolbar color="blue-light">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="ion-text-center margin-right">Facturas Rechazadas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="12">
+            <ion-searchbar
+              animated
+              placeholder="..."
+              cancelButtonText="Custom Cancel"
+              (ionChange)="buscar( $event )"
+            ></ion-searchbar>
+          </ion-col>
+        </ion-row>
+    
+        <ion-list
+          *ngFor="let item of facturas | filtro: searchFactura; let i = index"
+          class="accordion-list ion-no-padding"
+          lines="none"
+          detail="false"
+        >
+          <ion-item
+            tappable
+            (click)="toggleSection(i)"
+            [ngClass]="{'section-active': item.open, 'section': !item.open}"
+          >
+            <ion-icon
+              color="warning-design shade"
+              slot="start"
+              name="arrow-forward"
+              *ngIf="!item.open"
+            ></ion-icon>
+            <ion-icon slot="start" name="arrow-down" *ngIf="item.open"></ion-icon>
+            <ion-label>
+              {{ item.nombre | slice:0:25 }} (PO: {{item.idOrden}})
+            </ion-label>
+          </ion-item>
+    
+          <div *ngIf="item.open">
+            <ion-card>
+              <ion-row>
+                <ion-col size="6" class="ion-text-center">
+                  <p>{{ 'FACTURA.creation_date' | translate }}</p>
+                  <ion-item class="ion-text-center">
+                    <ion-label>{{item.fechaCreacion}}</ion-label>
+                    <ion-icon
+                      color="red-design"
+                      class="icon-simple"
+                      slot="start"
+                      name="calendar"
+                    ></ion-icon>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="6" class="ion-text-center">
+                  <p> {{ 'FACTURA.date_uploaded' | translate}} </p>
+                  <ion-item class="ion-text-center">
+                    <ion-label>{{item.fechaSubida}}</ion-label>
+                    <ion-icon
+                      color="blue-design"
+                      class="icon-simple"
+                      slot="start"
+                      name="checkmark-circle-outline"
+                    ></ion-icon>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+    
+              <ion-row>
+                <ion-col size="6" class="ion-text-center">
+                  <p>{{ 'FACTURA.invoice_ID' | translate }}</p>
+                  <ion-item class="ion-text-center">
+                    <ion-label>{{item.idFactura}}</ion-label>
+                    <ion-icon
+                      color="blue-design"
+                      class="icon-facts"
+                      slot="start"
+                      name="clipboard"
+                    ></ion-icon>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="6" class="ion-text-center">
+                  <p> {{ 'FACTURA.order_ID' | translate }} </p>
+                  <ion-item class="ion-text-center">
+                    <ion-label>{{item.idOrden}}</ion-label>
+                    <ion-icon
+                      color="red-design"
+                      class="icon-facts"
+                      slot="start"
+                      name="document"
+                    ></ion-icon>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12" class="ion-text-center">
+                  <p> Razon de rechazo </p>
+                  <ion-label>{{ item.razonRechazo }}</ion-label>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+          </div>
+        </ion-list>
+      </ion-grid>
+    </ion-content>
+    

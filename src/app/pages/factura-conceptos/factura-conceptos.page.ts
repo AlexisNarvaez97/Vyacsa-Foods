@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { EmailComposer } from "@ionic-native/email-composer/ngx";
 import Factura from "../../interfaces/factura.model";
 import { NavController } from "@ionic/angular";
+import { Storage } from "@ionic/storage";
 
 @Component({
   selector: "app-factura-conceptos",
@@ -37,14 +38,15 @@ export class FacturaConceptosPage implements OnInit {
 
   facturaMap: { [id: string]: any } = {};
 
-  factura: Factura;
+  factura;
 
   constructor(
     private route: ActivatedRoute,
     private facturaService: FacturasService,
     private emailComposer: EmailComposer,
     private navCtrl: NavController,
-    private router: Router
+    private router: Router,
+    private storage: Storage
   ) {}
 
   ngOnInit() {
@@ -145,7 +147,7 @@ export class FacturaConceptosPage implements OnInit {
               2
             )}`,
             showConfirmButton: false,
-            timer: 500
+            timer: 1500
           });
           this.facturaRechazada = true;
           this.facturaAprobada = false;
@@ -208,6 +210,8 @@ export class FacturaConceptosPage implements OnInit {
     const valorRadio = valor.detail.value;
     const facturaEdit = this.factura;
 
+    let email = "";
+
     if (valorRadio === "factura") {
       const facturaRefacturacion = {
         ...facturaEdit
@@ -219,14 +223,17 @@ export class FacturaConceptosPage implements OnInit {
 
       // console.log("Refacturacion", facturaRefacturacion);
 
-
       // Obtener el email del localstorage y agregar el video.
+      this.storage.get("User").then(usuario => {
+        email = usuario.email;
+        console.log(usuario.email);
+      });
 
       this.emailComposer.open({
         app: "gmail",
-        to: "alexisnarvaez97@hotmail.com",
-        cc: "alexisnarvaez97@hotmail.com",
-        subject: `${facturaEdit.nombre} con N.O.C ${facturaEdit.num_orden}`,
+        to: facturaEdit.email,
+        cc: facturaEdit.email,
+        subject: `${facturaEdit.nombre} con N.O.C ${facturaEdit.idOrden}`,
         body: "Refacturación",
         isHtml: true
       });
@@ -243,9 +250,9 @@ export class FacturaConceptosPage implements OnInit {
 
       this.emailComposer.open({
         app: "gmail",
-        to: "alexisnarvaez97@hotmail.com",
-        cc: "alexisnarvaez97@hotmail.com",
-        subject: `${facturaEdit.nombre} con N.O.C ${facturaEdit.num_orden}`,
+        to: facturaEdit.email,
+        cc: facturaEdit.email,
+        subject: `${facturaEdit.nombre} con N.O.C ${facturaEdit.idOrden}`,
         body: "Nota de crédito",
         isHtml: true
       });
@@ -299,7 +306,6 @@ export class FacturaConceptosPage implements OnInit {
   }
 
   facturaPasada() {
-
     console.log(this.facturasAprobadas);
 
     const Toast = Swal.mixin({
