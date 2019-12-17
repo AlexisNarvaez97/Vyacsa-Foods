@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content>
-  <form #f="ngForm" (ngSubmit)="enviarData(f)">
+  <form #f="ngForm" (ngSubmit)="enviarData(f); f.resetForm()">
     <ion-list>
       <ion-item>
         <ion-label>{{ 'EDIT.date' | translate }}</ion-label>
@@ -40,75 +40,56 @@
 
     <ion-grid fixed>
       <ion-row>
-        <ion-col size="12">
+        <ion-col size="12" class="ion-text-center">
           <h4>{{ 'EDIT.items' | translate }}</h4>
-          <ion-card *ngFor="let concepto of conceptos; let i = index">
-            <ion-list>
-              <ion-col size="12">
-                <ion-item>
-                  <ion-label
-                    >{{ 'EDIT.product' | translate }}: {{ concepto.Descripcion |
-                    slice:0:15 }}</ion-label
-                  >
-                </ion-item>
-              </ion-col>
-              <ion-col size="12">
-                <ion-label>{{ 'EDIT.item-QB' | translate }}</ion-label>
-              </ion-col>
-              <ion-col size="12">
-                <ion-item>
-                  <!-- <app-select [conceptos]="conceptos" (opcionSeleccionada)="valorSelect($event)" ></app-select> -->
-                  <!-- <ion-select name="seleccion" placeholder="Select One" ngModel (ionChange)="cambio($event)">
-                  <ion-select-option *ngFor="let concepto of conceptos" [value]="concepto.Descripcion">{{concepto.Descripcion }}</ion-select-option>
-                </ion-select> -->
-                  <ionic-selectable
-                    placeholder="Seleccione una opción..."
-                    [items]="conceptos"
-                    itemTextField="Descripcion"
-                    [canSearch]="true"
-                    (onChange)="opcionCambiante($event)"
-                  >
-                  </ionic-selectable>
-                </ion-item>
-              </ion-col>
-              <ion-row>
-                <ion-col size="6">
-                  {{ 'EDIT.unit-value' | translate }}
-                  <ion-label>
-                    {{ concepto.ValorUnitario }}
-                  </ion-label>
-                </ion-col>
-                <ion-col size="6">
-                  {{ 'EDIT.quantity' | translate }}
-                  <ion-label> {{ concepto.Cantidad }} </ion-label>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col size="6">
-                  {{ 'EDIT.amount' | translate }}
-                  <ion-label>{{ concepto.Importe }}</ion-label>
-                </ion-col>
-                <ion-col size="6">
-                  {{ 'EDIT.key' | translate }}
-                  <ion-label>{{ concepto.ClaveProdServ }}</ion-label>
-                </ion-col>
-              </ion-row>
-            </ion-list>
 
-            <ion-button
-              expand="full"
-              (click)="validarFactura(i)"
-              color="success"
-              class="ion-no-margin"
-            >
-              <ion-icon slot="icon-only" name="checkmark"></ion-icon>
-            </ion-button>
-          </ion-card>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th class="ion-text-center">{{ 'CONCEPTOS.description' | translate }}</th>
+                <th class="ion-text-center">{{ 'EDIT.quantity' | translate }}</th>
+                <th class="ion-text-center">{{ 'EDIT.amount' | translate }}</th>
+                <th class="ion-text-center">{{ 'EDIT.add' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let factura of conceptos; let i = index">
+                <th class="ion-text-center">
+                  <ion-label>{{ factura.Descripcion | slice:0:20}} </ion-label>
+                </th>
+                <th class="ion-text-center padding-top">
+                  <ion-label class="cantidad">
+                    {{ factura.Cantidad | slice:0:10 }}
+                  </ion-label>
+                  <ion-icon color="progress" slot="start" name="cash"></ion-icon>
+                </th>
+                <th class="ion-text-center padding-top">
+                  <ion-label class="cantidad">
+                    {{ factura.Importe | slice:0:10 }}
+                  </ion-label>
+                  <ion-icon color="progress" slot="start" name="cash"></ion-icon>
+                </th>
+                <th class="ion-text-center">
+                  <ion-button
+                    (click)="validarFactura(i)"
+                    color="success"
+                    class="ion-no-margin"
+                  >
+                    <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+                  </ion-button>
+                </th>
+              </tr>
+            </tbody>
+          </table>
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-button color="tertiary" expand="full" type="submit">
-      {{ 'EDIT.approve' | translate }}
-    </ion-button>
+    <ion-row class="ion-text-center">
+      <ion-col size="12">
+        <ion-button expand="block" color="success" type="submit">
+          {{ 'EDIT.approve' | translate }}
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </form>
 </ion-content>

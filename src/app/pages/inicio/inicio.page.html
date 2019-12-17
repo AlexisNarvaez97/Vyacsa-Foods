@@ -1,9 +1,17 @@
-<hidenav-stretchheader header-height="50" opacity-factor="7" opacity-color="white" init-expanded="true" no-border>
+<hidenav-stretchheader
+  header-height="50"
+  opacity-factor="7"
+  opacity-color="white"
+  init-expanded="true"
+  no-border
+>
   <ion-toolbar color="none" #static>
     <ion-buttons slot="start">
       <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
-    <ion-title color="light" (click)="expand()" class="ion-text-center">{{ "INICIO.title" | translate }}</ion-title>
+    <ion-title color="light" (click)="expand()" class="ion-text-center"
+      >{{ "INICIO.title" | translate }}</ion-title
+    >
   </ion-toolbar>
 
   <div #shrinkexpand (click)="expand()">
@@ -12,18 +20,54 @@
 </hidenav-stretchheader>
 
 <ion-content class="ion-padding" hidenav-sh-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="6">
+          <img src="assets/tele.png" alt="" height="150px">
+        </ion-col>
+        <ion-col size="6">
+          <p style="font-weight: 700;">{{ user.nombre }}</p>
+          <br>
+          <p>ID Proveedor</p>
+          <ion-label>{{ user.idProveedor}}</ion-label>
+          <ion-icon class="icon-provedor"name="contacts"></ion-icon>
+          <br>
+          <p>ID Usuario</p>
+          <ion-label>{{ user.idUser }}</ion-label>
+          <ion-icon class="icon-user" name="contact"></ion-icon>
+          <br>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
 
-  <ion-button expand="full" (click)="menu()">
-    {{ "INICIO.open-m" | translate }}
-  </ion-button>
 
-  <ion-button color="warning" expand="full" routerLink="/menu/facturas-pendientes">
-    {{ "INICIO.open-f" | translate }}
-  </ion-button>
-
-  <ion-button color="danger" expand="full" routerLink="/menu/facturas-rechazadas">
-    {{ "INICIO.open-r" | translate }}
-  </ion-button>
-
+  <ion-row class="ion-text-center">
+    <ion-col size="12">
+      <p style="font-weight: 700;" class="mt-2">Presione para visualizar el menu.</p>
+      <ion-button expand="full" (click)="menu()">
+        {{ "INICIO.open-m" | translate }}
+      </ion-button>
+    
+      <p style="font-weight: 700;" class="mt-2"> Presione para dirigirse a Facturas Pendientes</p>
+      <ion-button
+        color="warning"
+        expand="full"
+        routerLink="/menu/facturas-pendientes"
+      >
+        {{ "INICIO.open-f" | translate }}
+      </ion-button>
+    
+      <p style="font-weight: 700;" class="mt-2"> Presione para dirigirse a Facturas Rechazadas</p>
+      <ion-button
+        color="danger"
+        expand="full"
+        routerLink="/menu/facturas-rechazadas"
+      >
+        {{ "INICIO.open-r" | translate }}
+      </ion-button>
+    </ion-col>
+  </ion-row>
 
 </ion-content>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="420" height="823" viewBox="0 0 420 823">
+  <defs>
+    <clipPath id="clip-ss3">
+      <rect width="420" height="823"/>
+    </clipPath>
+  </defs>
+  <g id="ss3" clip-path="url(#clip-ss3)">
+    <rect width="420" height="823" fill="#fff"/>
+    <ellipse id="Elipse_7" data-name="Elipse 7" cx="316" cy="312.5" rx="316" ry="312.5" transform="translate(-374 614)" fill="#2460da"/>
+    <ellipse id="Elipse_6" data-name="Elipse 6" cx="291.5" cy="290" rx="291.5" ry="290" transform="translate(-163 742)" fill="#4c9fff"/>
+    <ellipse id="Elipse_5" data-name="Elipse 5" cx="316.5" cy="286.5" rx="316.5" ry="286.5" transform="matrix(1, -0.017, 0.017, 1, 128.662, 645.502)" fill="#97f68d"/>
+  </g>
+</svg>

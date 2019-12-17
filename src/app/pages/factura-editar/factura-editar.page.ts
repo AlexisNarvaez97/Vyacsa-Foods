@@ -75,6 +75,19 @@ export class FacturaEditarPage implements OnInit {
   }
 
   validarFactura(idFactura) {
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      onOpen: toast => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      }
+    });
+
     const bienesAprobados = this.conceptos;
 
     for (const [id, factura] of bienesAprobados.entries()) {
@@ -91,6 +104,11 @@ export class FacturaEditarPage implements OnInit {
         // console.log(nuevaFactura.opcionBill);
 
         this.facturasBill.push(nuevaFactura);
+
+        Toast.fire({
+          icon: "success",
+          title: `Item guardado`
+        });
 
         console.log("FacturasBill", this.facturasBill);
 

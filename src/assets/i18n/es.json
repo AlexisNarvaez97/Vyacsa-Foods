@@ -45,7 +45,8 @@
         "quantity": "Cantidad",
         "amount": "Importe",
         "key": "Clave",
-        "approve": "Aprobar"
+        "approve": "Aprobar",
+        "add": "Agregar"
     },
     "REPORTS": {
         "title": "Reportes"

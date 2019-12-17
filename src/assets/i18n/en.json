@@ -45,7 +45,8 @@
         "quantity": "Quantity",
         "amount": "Amount",
         "key": "Key",
-        "approve": "Approve"
+        "approve": "Approve",
+        "add": "Add"
     },
     "REPORTS": {
         "title": "Reports"
@@ -59,11 +60,5 @@
         "title": "Home",
         "open-m": "Open Menu",
         "open-f": "Open Pending Invoices"
-    },
-    "INICIO": {
-        "title": "Home",
-        "open-m": "Open Menu",
-        "open-f": "Open Pending Invoices",
-        "open-r": "Open Rejected Invoices"
     }
 }
