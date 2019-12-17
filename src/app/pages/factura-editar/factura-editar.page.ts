@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController } from "@ionic/angular";
 
 import { Ionic4DatepickerModalComponent } from "@logisticinfotech/ionic4-datepicker";
 import { FacturasService } from "../../services/facturas.service";
@@ -8,7 +8,6 @@ import { ActivatedRoute } from "@angular/router";
 import { IonicSelectableComponent } from "ionic-selectable";
 
 import Swal from "sweetalert2";
-
 
 @Component({
   selector: "app-factura-editar",
@@ -46,17 +45,12 @@ export class FacturaEditarPage implements OnInit {
     this.getFactura(id);
     const facturaActual = this.facturaService.selectedObject;
     this.factura = this.facturaService.selectedObject;
-    // console.log(`Factura actual con el ${id}`);
     console.log(facturaActual);
-
-    // console.log('AVER', this.optionSeleccionado);
   }
 
   opcionCambiante(event: { component: IonicSelectableComponent; value: any }) {
     // Se almacena la opcion del selectable
     this.opcionBill = event.value.Descripcion;
-    console.log("Opcion:", event.value.Descripcion);
-    // console.log('Referencia alv', this.portComponent);
   }
 
   getFactura(id: string) {
@@ -70,12 +64,10 @@ export class FacturaEditarPage implements OnInit {
       } else {
         this.conceptos.push(factura.conceptos);
       }
-      // console.log(this.conceptos);
     });
   }
 
   validarFactura(idFactura) {
-
     const Toast = Swal.mixin({
       toast: true,
       position: "top-end",
@@ -93,16 +85,11 @@ export class FacturaEditarPage implements OnInit {
     for (const [id, factura] of bienesAprobados.entries()) {
       if (id === idFactura) {
         const opcionBill = this.opcionBill;
-        // console.log(factura);
         const nuevaFactura = {
           id,
           ...factura,
           opcionBill
         };
-
-        // console.log(nuevaFactura);
-        // console.log(nuevaFactura.opcionBill);
-
         this.facturasBill.push(nuevaFactura);
 
         Toast.fire({
@@ -117,7 +104,9 @@ export class FacturaEditarPage implements OnInit {
             item => item.index === nuevaFactura.id
           );
           this.facturasAprobadas[idRepetido] = nuevaFactura;
-          console.log(`Rebaso el tamaño de los conceptos ${this.conceptos.length}`);
+          console.log(
+            `Rebaso el tamaño de los conceptos ${this.conceptos.length}`
+          );
           this.facturasBill.pop();
           return;
         }
@@ -181,7 +170,6 @@ export class FacturaEditarPage implements OnInit {
   }
 
   enviarData(form) {
-
     const Toast = Swal.mixin({
       toast: true,
       position: "top-end",
@@ -194,20 +182,18 @@ export class FacturaEditarPage implements OnInit {
       }
     });
 
-    console.log('ENVIAR AL ENDPOINT');
+    console.log("ENVIAR AL ENDPOINT");
     console.log(form.value);
     console.log(this.factura);
-
-    // console.log(this.facturasBill);
-
-    this.facturaService.postGuardarBill(form.value, this.factura, this.facturasBill).subscribe( resp => {
-      console.log('Response', resp);
-      Toast.fire({
-        icon: "success",
-        title: `Factura guardada`
+    this.facturaService
+      .postGuardarBill(form.value, this.factura, this.facturasBill)
+      .subscribe(resp => {
+        console.log("Response", resp);
+        Toast.fire({
+          icon: "success",
+          title: `Factura guardada`
+        });
+        this.navCtrl.navigateForward(["/menu/facturas-pendientes"]);
       });
-      this.navCtrl.navigateForward(['/menu/facturas-pendientes']);
-    });
   }
-
 }

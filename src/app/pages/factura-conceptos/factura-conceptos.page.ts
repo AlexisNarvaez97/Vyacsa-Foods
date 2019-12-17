@@ -14,9 +14,6 @@ import { Storage } from "@ionic/storage";
   styleUrls: ["./factura-conceptos.page.scss"]
 })
 export class FacturaConceptosPage implements OnInit {
-  facturita = false;
-  credito = false;
-
   comprobante: any[] = [];
   emisor: any[] = [];
   impuestos: any[] = [];
@@ -36,8 +33,6 @@ export class FacturaConceptosPage implements OnInit {
   facturasDiferencias: any[] = [];
   facturasAprobadas: any[] = [];
 
-  facturaMap: { [id: string]: any } = {};
-
   factura;
 
   constructor(
@@ -55,7 +50,6 @@ export class FacturaConceptosPage implements OnInit {
 
     const facturaActual = this.facturaService.selectedObject;
     this.factura = this.facturaService.selectedObject;
-    // console.log(`Factura actual con el ${id}`);
     console.log(facturaActual);
   }
 
@@ -85,10 +79,7 @@ export class FacturaConceptosPage implements OnInit {
     // console.log("Evento", cantidadInput);
   }
 
-  onSubmit(valor) {
-    // console.log(valor.valid);
-    // console.log(valor.value.cantidad);
-  }
+  onSubmit(valor) {}
 
   validarFactura(idFactura) {
     const Toast = Swal.mixin({
@@ -127,7 +118,6 @@ export class FacturaConceptosPage implements OnInit {
             icon: "error",
             title: "No se aceptan numeros negativos"
           });
-          // console.log("Negativo");
           return;
         }
 
@@ -179,7 +169,6 @@ export class FacturaConceptosPage implements OnInit {
           console.log("No hagas nada no hay diferencias", diferencias);
           this.facturaAprobada = true;
           this.facturaRechazada = false;
-          // this.facturaService.postCredit(partidas, this.factura);
           return;
         }
       }
@@ -220,9 +209,6 @@ export class FacturaConceptosPage implements OnInit {
       facturaRefacturacion.estado = "0";
 
       this.facturaRefacturacion = facturaRefacturacion;
-
-      // console.log("Refacturacion", facturaRefacturacion);
-
       // Obtener el email del localstorage y agregar el video.
       this.storage.get("User").then(usuario => {
         email = usuario.email;
@@ -245,8 +231,6 @@ export class FacturaConceptosPage implements OnInit {
       facturaNota.estado = "1";
 
       this.facturaNota = facturaNota;
-
-      // console.log("Nota", facturaNota);
 
       this.emailComposer.open({
         app: "gmail",
@@ -301,8 +285,6 @@ export class FacturaConceptosPage implements OnInit {
           });
         });
     }
-
-    // console.log(facturaDif);
   }
 
   facturaPasada() {
@@ -319,8 +301,6 @@ export class FacturaConceptosPage implements OnInit {
         toast.addEventListener("mouseleave", Swal.resumeTimer);
       }
     });
-
-    const partidas = this.conceptos;
     const facturaNormal = this.factura;
 
     facturaNormal.estado = "6";

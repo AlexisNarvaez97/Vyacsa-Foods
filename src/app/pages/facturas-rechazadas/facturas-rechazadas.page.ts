@@ -29,7 +29,7 @@ export class FacturasRechazadasPage implements OnInit {
 
     if (this.automaticClose && this.facturas[index].open) {
       this.facturas
-        .filter((item, itemIndex) => itemIndex != index)
+        .filter((item, itemIndex) => itemIndex !== index)
         .map(item => (item.open = false));
     }
   }
